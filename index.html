@@ -95,7 +95,41 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p><code>xargs</code>命令是将标准输入转换为命令行参数，默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。</p>
+<p><strong>xargs命令默认执行echo命令</strong></p>
+<p>为什么有了管道还需要这个命令？这是因为很多命令不支持管道，所以需要<code>xargs</code>命令来接收命令的输出来当下一个命令的参数。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xargs [选项]  <span class="comment"># xargs命令一般和管道一起使用</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常用参数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>指定分隔符</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>将前面的就过用{}代替，一般是一行行传递</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>指定每行的最大参数量</td>
+</tr>
+</tbody></table>
+<h2 id="多行与单行输出转换"><a href="#多行与单行输出转换" class="headerlink" title="多行与单行输出转换"></a>多行与单行输出转换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@192 <span class="built_in">test</span>]<span class="comment"># echo &#123;1..3&#125;|xargs</span></span><br><span class="line">1 2 3</span><br><span class="line">[root@192 <span class="built_in">test</span>]<span class="comment"># echo &#123;1..3&#125;|xargs -n 1</span></span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行变单行</span></span><br><span class="line">xargs &lt; test.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="分割字符"><a href="#分割字符" class="headerlink" title="分割字符"></a>分割字符</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@192 <span class="built_in">test</span>]<span class="comment"># echo &quot;asdasxasdhajsdxasda&quot; |xargs -d &quot;x&quot;</span></span><br><span class="line">asdas asdhajsd asda</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="指代变量"><a href="#指代变量" class="headerlink" title="指代变量"></a>指代变量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@192 <span class="built_in">test</span>]<span class="comment"># echo `seq 10`|xargs -i touch &#123;&#125;</span></span><br><span class="line"><span class="comment"># 因为-i参数&#123;&#125;指代内容是一行一行的</span></span><br><span class="line"><span class="comment"># 所以这条命令会创建一个&quot;1 2 3 4 5 6 7 8 9 10&quot;的文件</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
