@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AYO</title>
+  <icon>https://www.gravatar.com/avatar/330b9860700e863b658ef2e2dd085201</icon>
+  <subtitle>天行健，君子以自强不息</subtitle>
+  <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://ayo-al.github.io/"/>
+  <updated>2023-11-27T09:51:17.565Z</updated>
+  <id>https://ayo-al.github.io/</id>
+  
+  <author>
+    <name>AYO</name>
+    <email>2609320892@qq.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://ayo-al.github.io/2023/11/23/Untitled/"/>
+    <id>https://ayo-al.github.io/2023/11/23/Untitled/</id>
+    <published>2023-11-23T08:16:57.895Z</published>
+    <updated>2023-11-27T09:51:17.565Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;摘要&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="PS3" scheme="https://ayo-al.github.io/tags/PS3/"/>
+    
+    <category term="Games" scheme="https://ayo-al.github.io/tags/Games/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>title</title>
+    <link href="https://ayo-al.github.io/2023/11/23/title/"/>
+    <id>https://ayo-al.github.io/2023/11/23/title/</id>
+    <published>2023-11-23T07:38:05.000Z</published>
+    <updated>2023-11-27T09:51:29.482Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;code&gt;xargs&lt;/code&gt;命令是将标准输入转换为命令行参数，默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs</summary>
+        
+      
+    
+    
+    
+    <category term="Database" scheme="https://ayo-al.github.io/categories/Database/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://ayo-al.github.io/2023/11/23/hello-world/"/>
+    <id>https://ayo-al.github.io/2023/11/23/hello-world/</id>
+    <published>2023-11-23T06:05:51.909Z</published>
+    <updated>2023-11-27T09:51:45.246Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="Kubernetes" scheme="https://ayo-al.github.io/categories/Kubernetes/"/>
+    
+    
+  </entry>
+  
+</feed>
