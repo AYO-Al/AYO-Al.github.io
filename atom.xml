@@ -6,7 +6,7 @@
   <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayo-al.github.io/"/>
-  <updated>2023-11-27T09:51:17.565Z</updated>
+  <updated>2023-11-28T06:09:23.358Z</updated>
   <id>https://ayo-al.github.io/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="https://ayo-al.github.io/2023/11/23/Untitled/"/>
     <id>https://ayo-al.github.io/2023/11/23/Untitled/</id>
     <published>2023-11-23T08:16:57.895Z</published>
-    <updated>2023-11-27T09:51:17.565Z</updated>
+    <updated>2023-11-28T06:09:23.358Z</updated>
     
     
     <summary type="html">&lt;p&gt;摘要&lt;/p&gt;</summary>
     
     
     
-    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    <category term="Kubernetes" scheme="https://ayo-al.github.io/categories/Kubernetes/"/>
     
     
     <category term="PS3" scheme="https://ayo-al.github.io/tags/PS3/"/>
@@ -61,25 +61,29 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://ayo-al.github.io/2023/11/23/hello-world/"/>
-    <id>https://ayo-al.github.io/2023/11/23/hello-world/</id>
+    <title>DNS深入</title>
+    <link href="https://ayo-al.github.io/2023/11/23/DNS%E6%B7%B1%E5%85%A5/"/>
+    <id>https://ayo-al.github.io/2023/11/23/DNS%E6%B7%B1%E5%85%A5/</id>
     <published>2023-11-23T06:05:51.909Z</published>
-    <updated>2023-11-27T09:51:45.246Z</updated>
+    <updated>2023-11-28T06:13:37.529Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;1-DNS与CDN&quot;&gt;&lt;a href=&quot;#1-DNS与CDN&quot; class=&quot;headerlink&quot;</summary>
         
       
     
     
     
-    <category term="Kubernetes" scheme="https://ayo-al.github.io/categories/Kubernetes/"/>
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
     
+    
+    <category term="DNS" scheme="https://ayo-al.github.io/tags/DNS/"/>
+    
+    <category term="CDN" scheme="https://ayo-al.github.io/tags/CDN/"/>
     
   </entry>
   
