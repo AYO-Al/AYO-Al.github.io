@@ -1,4 +1,4 @@
-var posts=["2023/11/23/DNS深入/","2023/11/23/Untitled/","2023/11/28/DNS深入 - 副本/","2023/11/23/title/"];function toRandomPost(){
+var posts=["2023/11/28/DNS深入 - 副本/","2023/11/23/title/","2023/11/23/DNS深入/","2023/11/23/Untitled/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };var friend_link_list=[];
     var refreshNum = 1;
