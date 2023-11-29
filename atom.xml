@@ -6,7 +6,7 @@
   <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayo-al.github.io/"/>
-  <updated>2023-11-29T07:33:52.075Z</updated>
+  <updated>2023-11-28T06:44:51.032Z</updated>
   <id>https://ayo-al.github.io/</id>
   
   <author>
@@ -15,31 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Linux命令行</title>
-    <link href="https://ayo-al.github.io/2023/11/29/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
-    <id>https://ayo-al.github.io/2023/11/29/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C/</id>
-    <published>2023-11-29T07:32:18.482Z</published>
-    <updated>2023-11-29T07:33:52.075Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-命令行概述&quot;&gt;&lt;a href=&quot;#1-命令行概述&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
-    
-    
-    <category term="Shell" scheme="https://ayo-al.github.io/tags/Shell/"/>
-    
-  </entry>
   
   <entry>
     <title>DNS深入</title>
@@ -128,11 +103,36 @@
   </entry>
   
   <entry>
+    <title>Linux命令行</title>
+    <link href="https://ayo-al.github.io/2022/10/16/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    <id>https://ayo-al.github.io/2022/10/16/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C/</id>
+    <published>2022-10-15T16:00:00.000Z</published>
+    <updated>2022-11-21T16:00:00.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-命令行概述&quot;&gt;&lt;a href=&quot;#1-命令行概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Shell" scheme="https://ayo-al.github.io/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
     <title>My New Blog Post</title>
     <link href="https://ayo-al.github.io/2020/11/29/My-New-Blog-Post/"/>
     <id>https://ayo-al.github.io/2020/11/29/My-New-Blog-Post/</id>
-    <published>2020-11-29T08:04:57.000Z</published>
-    <updated>2023-11-29T08:05:53.975Z</updated>
+    <published>2020-11-28T16:00:00.000Z</published>
+    <updated>2023-11-29T08:09:13.724Z</updated>
     
     
     
