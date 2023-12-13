@@ -6,7 +6,7 @@
   <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayo-al.github.io/"/>
-  <updated>2023-11-28T06:44:51.032Z</updated>
+  <updated>2023-11-28T07:08:07.773Z</updated>
   <id>https://ayo-al.github.io/</id>
   
   <author>
@@ -15,71 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>DNS深入</title>
-    <link href="https://ayo-al.github.io/2023/11/28/DNS%E6%B7%B1%E5%85%A5%20-%20%E5%89%AF%E6%9C%AC/"/>
-    <id>https://ayo-al.github.io/2023/11/28/DNS%E6%B7%B1%E5%85%A5%20-%20%E5%89%AF%E6%9C%AC/</id>
-    <published>2023-11-28T06:55:41.608Z</published>
-    <updated>2023-11-28T06:44:51.032Z</updated>
-    
-    
-    <summary type="html">学习这篇文章，你你将能够自主配置DNS</summary>
-    
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
-    
-    
-    <category term="DNS" scheme="https://ayo-al.github.io/tags/DNS/"/>
-    
-    <category term="CDN" scheme="https://ayo-al.github.io/tags/CDN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://ayo-al.github.io/2023/11/23/Untitled/"/>
-    <id>https://ayo-al.github.io/2023/11/23/Untitled/</id>
-    <published>2023-11-23T08:16:57.895Z</published>
-    <updated>2023-11-28T06:09:23.358Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;摘要&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Kubernetes" scheme="https://ayo-al.github.io/categories/Kubernetes/"/>
-    
-    
-    <category term="PS3" scheme="https://ayo-al.github.io/tags/PS3/"/>
-    
-    <category term="Games" scheme="https://ayo-al.github.io/tags/Games/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>title</title>
-    <link href="https://ayo-al.github.io/2023/11/23/title/"/>
-    <id>https://ayo-al.github.io/2023/11/23/title/</id>
-    <published>2023-11-23T07:38:05.000Z</published>
-    <updated>2023-11-27T09:51:29.482Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;code&gt;xargs&lt;/code&gt;命令是将标准输入转换为命令行参数，默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs</summary>
-        
-      
-    
-    
-    
-    <category term="Database" scheme="https://ayo-al.github.io/categories/Database/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>DNS深入</title>
@@ -99,31 +34,6 @@
     <category term="DNS" scheme="https://ayo-al.github.io/tags/DNS/"/>
     
     <category term="CDN" scheme="https://ayo-al.github.io/tags/CDN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux命令行</title>
-    <link href="https://ayo-al.github.io/2022/10/16/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%20-%20%E5%89%AF%E6%9C%AC/"/>
-    <id>https://ayo-al.github.io/2022/10/16/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%20-%20%E5%89%AF%E6%9C%AC/</id>
-    <published>2022-10-15T16:00:00.000Z</published>
-    <updated>2022-11-21T16:00:00.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-命令行概述&quot;&gt;&lt;a href=&quot;#1-命令行概述&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
-    
-    
-    <category term="Shell" scheme="https://ayo-al.github.io/tags/Shell/"/>
     
   </entry>
   
@@ -149,19 +59,6 @@
     
     
     <category term="Shell" scheme="https://ayo-al.github.io/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>My New Blog Post</title>
-    <link href="https://ayo-al.github.io/2020/11/29/My-New-Blog-Post/"/>
-    <id>https://ayo-al.github.io/2020/11/29/My-New-Blog-Post/</id>
-    <published>2020-11-28T16:00:00.000Z</published>
-    <updated>2023-11-29T08:09:13.724Z</updated>
-    
-    
-    
-    
     
   </entry>
   
