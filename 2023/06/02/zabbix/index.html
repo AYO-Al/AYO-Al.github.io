@@ -1,0 +1,1219 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Zabbix监控 | AYO</title><meta name="keywords" content="Linux,监控,Zabbix"><meta name="author" content="AYO,2609320892@qq.com"><meta name="copyright" content="AYO"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Zabbix监控"><meta name="application-name" content="Zabbix监控"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Zabbix监控"><meta property="og:url" content="https://ayo-al.github.io/2023/06/02/zabbix/index.html"><meta property="og:site_name" content="AYO"><meta property="og:description" content="1.Zabbix1.1.监控概述监控是指对行为、活动或其他变动中信息的一种持续性关注，通常是为了对人达成影响、管理、指导或保护的目的  监控  监视主机架构状态 控制，事后追责 目标：早发现早处理(故障、性能、架构) 网站扩容(用数据说话)     为什么要监控   对系统不间断实时监控 实时反馈系"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://ayo-al.github.io/img/preview.jpg"><meta property="article:author" content="AYO"><meta property="article:tag" content=""><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://ayo-al.github.io/img/preview.jpg"><meta name="description" content="1.Zabbix1.1.监控概述监控是指对行为、活动或其他变动中信息的一种持续性关注，通常是为了对人达成影响、管理、指导或保护的目的  监控  监视主机架构状态 控制，事后追责 目标：早发现早处理(故障、性能、架构) 网站扩容(用数据说话)     为什么要监控   对系统不间断实时监控 实时反馈系"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://ayo-al.github.io/2023/06/02/zabbix/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.yuki.love',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: {"appId":"XMRZIUY8NL","apiKey":"187af2610e1cc500c95dc8b8f3a53d0e","indexName":"hexo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: AYO","link":"链接: ","source":"来源: AYO","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'AYO',
+  title: 'Zabbix监控',
+  postAI: '',
+  pageFillDescription: '1.Zabbix, 1.1.监控概述, 1.2.Linux有关性能的指令, 1.3.企业面试题：公司监控如何做, 1.2.概述, 1.3.Zabbix架构, 2.使用Zabbix, 2.1.配置要求, 2.2.Zabbix安装, 2.3.监控主机, 2.4.自定义监控, 1.监控项类型, 2.5.自定义触发器, 2.6.自定义监控故障案例, 1.权限, 2.脚本执行时间, 3.awk取列, 2.7.创建模板, 2.8.告警方案, 1.告警分类, 2.邮件报警, 3.脚本报警, 2.9.zabbix客户端, 1.snmp监控, 2.JMX监控, 2.10.自动化监控, 1.自动发现和自动注册, 2.zabbix-agent(取值)主动与被动, 2.11.分布式监控, 2.12.lld监控概述监控是指对行为活动或其他变动中信息的一种持续性关注通常是为了对人达成影响管理指导或保护的目的监控监视主机架构状态控制事后追责目标早发现早处理故障性能架构网站扩容用数据说话为什么要监控对系统不间断实时监控实时反馈系统当前状态保证业务持续性运行监控流程数据采集数据存储数据分析展示告警监控的内容有关性能的指令企业面试题公司监控如何做等同于你们公司监控了什么单台机器业务信息应用程序代码是否有问题需要与开发沟通书写一个页面服务信息各种服务的进程端口状态特定的信息不同服务系统信息内存磁盘使用率负载网络硬件信息磁盘状态温度风扇转速网站集群监控用户访问流程解析与通过全局访问测试工具模仿用户在全国全球各地访问网站在全国各地核心城市部署一台服务器访问源站免费商业版听云监控宝三次握手网站负载均衡监控请求报文监控日志查看状态码补充加上监控过期请求经过网站架构负载均衡服务器缓存数据库存储四次挥手网站负载均衡监控断开连接概述由创建目前由主导开发和支持是一个企业级的开源分布式监控解决方案是一款监控网络的众多参数以及服务器虚拟机应用程序服务数据库网站云等的健康和完整性的软件使用灵活的通知机制允许用户为几乎任何事件配置基于电子邮件的告警以实现对服务器问题做出快速反应基于存储的数据提供出色的报告和数据可视化功能这使得成为容量规划的理想选择支持轮询和所有报告和统计数据以及配置参数都可以通过基于的前端访问基于的前端确保可以从任何位置评估您的网络状态和服务器的健康状况如果配置得当不管对于拥有少量服务器的小型组织还是拥有大量服务器的大公司来讲都可以在监控基础设施方面发挥重要作用相关指标命令功能有如下数据收集可用性和性能检查支持和监控自定义检查以自定义间隔收集所需数据由和执行灵活的阈值定义可以定义非常灵活的问题阈值称为触发器从后端数据库引用值高度可配置的告警可以针对升级计划收件人媒体类型自定义发送通知使用宏可以使通知变得有意义和有用自动化操作包括执行远程命令实时图形采集到的监控项值可以使用内置的绘图功能立即绘图网络监控功能可以跟踪网站上的模拟鼠标点击路径并检查功能和响应时间广泛的可视化选项创建自定义图形的能力可以将多个监控项组合成一个聚合图形网络拓扑图在仪表盘中显示幻灯片报表受监控资源的高级业务视图历史数据存储存储在数据库中的数据可配置的历史保留趋势内置管家程序建议的配置将受监控的设备添加为主机一旦主机被数据库添加就会开始进行数据采集将模板应用于受监控的设备模板的使用在模板中分组检查模板可以继承其他模板网络发现网络设备自动发现自动注册发现文件系统网络接口和便捷的界面基于的前端可从任何地方访问可以通过你的方式点击到任何页面审计日志为提供可编程接口用于大规模操作第方软件集成和其他用途权限系统安全用户认证某些用户可以被限制仅访问某些视图全功能且易于扩展的部署在被监控目标上和操作系统都适用于二进制守护进程用编写用于提高性能和减少内存占用轻量级便携为复杂环境做好准备使用轻松实现远程监控架构是向其报告可用性和完整性信息和统计信息的中心组件是存储所有配置统计和操作数据的中央存储库数据存储收集的所有配置信息以及数据都存储在数据库中界面为了从任何地方和任何平台轻松访问提供了基于的界面该接口是的一部分通常但不一定与运行在同一台设备上可以代替收集性能和可用性数据是部署的可选部分但是对于分散单个的负载非常有用部署在被监控目标上以主动监控本地资源和应用程序并将收集到的数据报告给从开始有两种类型的可用轻量级在许多平台上支持用编写和非常灵活易于使用插件扩展用编写使用配置要求下表包含可用于计算系统所需磁盘空间的公式参数所磁盘空间的计算公式单位字节配置文件固定大通常为或更少历史数据监控项数量保留历史数据的天数监控项的更新间隔保留单个值所需要占用的字节数依赖于数据库引擎通常为字节趋势数据监控项数量保留历史数据的天数保留单个趋势数据所需要占用的字节数依赖于数据库引擎通常为字节事件数据每秒产生的事件数量假设最糟糕的情况下每秒产生个事件保留历史数据的天数保留单个趋势数据所需的字节数取决于数据库引擎通常为字节安装使用和自定义配置安装源码包和环境配置安装先要安装源或者使用官方源使用开启服务并设置自启配置配置修改组和用户准备会话保持目录测试数据库配置安装数据库进行一些安全性设置创建所需库和用户授予所有权限允许在启用二进制日志时创建存储函数而无需有权限服务端配置修改安装导入数据解压缩文件并将其内容输出到标准输出配置数据库服务默认开启功能日志文件位置日志文件大小不限制大小进程文件位置套接字目录文件位置超时时间警告脚本路径外部脚本路径记录慢查询的阈值允许访问统计数据信息的地址开启服务默认端口前端页面使用源码包去官网下载源码包安装前端页面连接数据库与需要在中修改的配置当你其他配置都完成后出现这个页面就是成功了并且配置项都可以去文件修改完成之后就可以登录了默认用户名是密码是登录后可以自己修改密码监控主机安装开发语言和性能独立进程方式运行个进程多线程运行减少资源消耗占用较少资源能够承受更高并发监控流程在客户端安装修改配置文件指定为服务端页面配置主机中添加主机添加后检测修改配置文件配置客户端主动模式的服务端地址客户端主机名指定了代理的控制套接字的位置启动检测客户端服务端是否连通安装命令在服务端执行如果有值则代表能获取数据自定义监控以下监控项类型由提供检查检查检查简单检查监控日志文件监控可计算监控项聚合计算内部检查检查检查外部检查采集器监控项监控检查相关监控项检查检查脚本监控概述定制化监控我们所要的内容提升性能提升性能去掉不需要的监控项自定义监控只要能够通过命令取出来的内容就可以做自定义监控应用场景定制默认的模板中没有我们要的监控项提升性能优化去掉定制监控项提升服务端的性能自定义监控流程客户端创建键值与调试书写监控命令脚本调试命令与脚本写入到客户端配置文件中或脚本与调试服务端页面查看页面是否可以获取数据设置触发器什么时候报警检查端口是否占用创建键值相当于一个服务端能识别的命令来获取客户端状态内置键值自定义键值最好写在使用带参数形式页面不支持参数形式得一个个写名本身具有有限的允许字符范围允许的字符是新建监控项历史数据保留时长每个更新间隔获取到的数据推荐设置为趋势数据保留时长记录数据变化的趋势推荐设置监控项类型自定义触发器触发器什么时候进行告警本质使用监控项获取的数据与我们设置的条件进行比较从而触发警报触发器表达式功能触发器表达式格式主机名监控项使用函数判断条件自定义监控故障案例权限原因客户端运行的时候用户获取数据可能导致权限故障解决授权很难解决源的权限问题但是可以自定义解决脚本执行时间默认限制命令或脚本执行时间不能超过修改服务端和客户端选项取列自定义监控的时候推荐使用脚本尤其是取列的时候容器出现故障推荐使用创建模板创建模板创建应用集监控项分类创建自定义监控项创建触发器创建图像模板可以与多个机器关联避免页面重复操作创建模板成功后就可以正常添加监控项触发器等监控项触发器图形都可以直接从其他主机上复制到模板中主要事项先找一个主机配置监控项等进行测试然后再进行创建模板告警方案前端消息告警开启功能并保证前端页面开启有报警提示时会发出声音不推荐告警分类邮件报警个人企业邮箱开启个人邮箱功能获取授权码发件人配置报警媒介类型收件人配置用户接收报警配置动作配置报警媒介参数收件人配置对所有人员分组权限一般以组设置创建用户时设置报警媒介配置动作脚本报警客户端客户端最常用适用于几乎所有情况简单网络管理协议监控网络设备监控未来建议自定义监控监控硬件物理服务器直接使用自定义监控监控应用监控网络设备也支持监控可以启动设备打印机使用启动设备的功能服务端进行测试能否获取到网络设备的信息添加主机监控项安装服务端配置服务端修改为增加一行安装命令使用命令指定字符串为指定协议版本为指定要查询的设备的地址指定要查询的对象标识符监控安装程序并开启远程监控功能安装服务端配置主机这个配置只能写成一行获取数据添加主机自动化监控自动发现服务端主动自动注册客户端主动客户端主动与被动模式分布式监控自动发现和自动注册共同点区别自动发现自动添加主机并关联模板启动主机客户端被动使用简单效率或性能较低对服务端压力较大自动注册自动添加主机并管理模板启动主机客户端主动配置繁琐一点对服务端压力较低高并发注册机器自动发现配置自动发现规则发现主机配置自动发现动作发现主机后关联模板等动作自动注册可与结合使用修改客户端配置文件服务端和页面动作自动注册取值主动与被动主动主动向汇报个监控请求次服务端收集到所有的数据被动等待索要个监控请求次效率低对服务压力大分布式监控应用场景有多个机房网段地域进行监控分布式监控代理监控安装导入表结构配置代理名字确保服务端知道代理名称也可使用配置代理修改客户端指向低级自动发现可以自动为主机上的不同实体创建监控项触发器和图表比如可以自动监控文件系统和网络接口并且不需要为其手工创建监控项另外可以基于周期性自动发现的结果来删除无用的监控实体应用场景低级自动发现特别适合用于监控那些有规律又有差异的监控对象系统内置的自动发现如果想立刻上手熟悉其它类型的自动发现更多信息和如何实现方面可参阅以下章节网络接口的自动发现和核心的自动发现的自动发现对象的自动发现使用查询的自动发现服务的自动发现主机接口的自动发现自动发现自动注册自动添加主机希望自动添加监控项自动监控一些有关联的内容网卡磁盘磁盘分区低级自动发现系统模板自带的自动发现规则系统内置自动发现键值内置宏用户定义宏低级自动发现专用宏根据网卡名字创建对应的监控项原型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-17 00:00:00',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="AYO" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://git.yuki.love/" title="AYO网站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="AYO网站"/><span class="back-menu-item-text">AYO网站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://juejin.cn/user/3708003152300183" title="AYO博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="AYO博客"/><span class="back-menu-item-text">AYO博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="GitHub"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">AYO</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ansible/" style="font-size: 1.05rem;">Ansible<sup>1</sup></a><a href="/tags/CDN/" style="font-size: 1.05rem;">CDN<sup>1</sup></a><a href="/tags/DNS/" style="font-size: 1.05rem;">DNS<sup>1</sup></a><a href="/tags/ELK/" style="font-size: 1.05rem;">ELK<sup>1</sup></a><a href="/tags/Httpd/" style="font-size: 1.05rem;">Httpd<sup>1</sup></a><a href="/tags/Keepalived/" style="font-size: 1.05rem;">Keepalived<sup>1</sup></a><a href="/tags/Kubernetes/" style="font-size: 1.05rem;">Kubernetes<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>18</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Nginx/" style="font-size: 1.05rem;">Nginx<sup>2</sup></a><a href="/tags/Prometheus/" style="font-size: 1.05rem;">Prometheus<sup>1</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>5</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/Shell/" style="font-size: 1.05rem;">Shell<sup>4</sup></a><a href="/tags/Web/" style="font-size: 1.05rem;">Web<sup>1</sup></a><a href="/tags/Zabbix/" style="font-size: 1.05rem;">Zabbix<sup>1</sup></a><a href="/tags/iptables/" style="font-size: 1.05rem;">iptables<sup>1</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>2</sup></a><a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.05rem;">爬虫<sup>3</sup></a><a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 1.05rem;">监控<sup>2</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">网络<sup>3</sup></a><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/" style="font-size: 1.05rem;">自动化运维<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.05rem;">随笔<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%9B%91%E6%8E%A7/" itemprop="url">监控</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Linux/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Linux</span></a><a class="article-meta__tags" href="/tags/%E7%9B%91%E6%8E%A7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>监控</span></a><a class="article-meta__tags" href="/tags/Zabbix/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Zabbix</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Zabbix监控</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-06-01T16:00:00.000Z" title="发表于 2023-06-02 00:00:00">2023-06-02</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-06-16T16:00:00.000Z" title="更新于 2023-06-17 00:00:00">2023-06-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.7k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/preview.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://ayo-al.github.io/2023/06/02/zabbix/"><header><a class="post-meta-categories" href="/categories/%E7%9B%91%E6%8E%A7/" itemprop="url">监控</a><a href="/tags/Linux/" tabindex="-1" itemprop="url">Linux</a><a href="/tags/%E7%9B%91%E6%8E%A7/" tabindex="-1" itemprop="url">监控</a><a href="/tags/Zabbix/" tabindex="-1" itemprop="url">Zabbix</a><h1 id="CrawlerTitle" itemprop="name headline">Zabbix监控</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">AYO</span><time itemprop="dateCreated datePublished" datetime="2023-06-01T16:00:00.000Z" title="发表于 2023-06-02 00:00:00">2023-06-02</time><time itemprop="dateCreated datePublished" datetime="2023-06-16T16:00:00.000Z" title="更新于 2023-06-17 00:00:00">2023-06-17</time></header><h1 id="1-Zabbix"><a href="#1-Zabbix" class="headerlink" title="1.Zabbix"></a>1.Zabbix</h1><h2 id="1-1-监控概述"><a href="#1-1-监控概述" class="headerlink" title="1.1.监控概述"></a>1.1.监控概述</h2><p><strong>监控</strong>是指对行为、活动或其他<strong>变动</strong>中信息的一种<strong>持续性</strong>关注，通常是为了对人达成影响、管理、指导或保护的目的</p>
+<ul>
+<li><p>监控</p>
+<ul>
+<li>监视主机架构状态</li>
+<li>控制，事后追责</li>
+<li>目标：早发现早处理(故障、性能、架构) 网站扩容(用数据说话)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>为什么要监控</p>
+</blockquote>
+<ul>
+<li>对系统不间断实时监控</li>
+<li>实时反馈系统当前状态</li>
+<li>保证业务持续性运行</li>
+</ul>
+<blockquote>
+<p>监控流程</p>
+</blockquote>
+<ol>
+<li><p>数据采集</p>
+</li>
+<li><p>数据存储</p>
+</li>
+<li><p>数据分析</p>
+</li>
+<li><p>展示&#x2F;告警</p>
+</li>
+</ol>
+<blockquote>
+<p>监控的内容</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/05/nllo82-0.png" alt="image-20230505142647440"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/05/nzmlwe-0.png" alt="image-20230505145055781"></p>
+<h2 id="1-2-Linux有关性能的指令"><a href="#1-2-Linux有关性能的指令" class="headerlink" title="1.2.Linux有关性能的指令"></a>1.2.Linux有关性能的指令</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/09/ff0qes-0.png" alt="image-20230509093215338"></p>
+<h2 id="1-3-企业面试题：公司监控如何做"><a href="#1-3-企业面试题：公司监控如何做" class="headerlink" title="1.3.企业面试题：公司监控如何做"></a>1.3.企业面试题：公司监控如何做</h2><ul>
+<li><p>等同于：你们公司监控了什么？</p>
+</li>
+<li><p>单台机器</p>
+<ul>
+<li>业务信息：应用、程序代码是否有问题(需要与开发沟通，书写一个页面)</li>
+<li>服务信息：各种服务的进程、端口、状态、特定的信息(不同服务)</li>
+<li>系统信息：cpu、内存(swap,buffer&#x2F;cache)、磁盘(io,使用率,inode)、负载、网络….</li>
+<li>硬件信息：磁盘、raid状态、温度、风扇转速</li>
+</ul>
+</li>
+<li><p>网站集群监控(用户访问流程)</p>
+<ul>
+<li><p>DNS解析与CDN 通过全局访问测试工具(模仿用户在全国(全球)各地访问网站)</p>
+<ul>
+<li>在全国各地核心城市部署一台服务器，访问源站&#x2F;cdn&#x2F;dns（smokeping）</li>
+<li>免费：<a target="_blank" rel="noopener" href="https://www.17ce.com/">17ce.com</a></li>
+<li>商业版：听云、监控宝</li>
+</ul>
+</li>
+<li><p>TCP三次握手-网站负载均衡监控 ss-ant</p>
+</li>
+<li><p>HTTP请求报文-监控web日志查看(状态码)   补充：加上HTTPS监控过期</p>
+</li>
+<li><p>请求经过网站架构</p>
+<ul>
+<li>负载均衡(Nginx)</li>
+<li>web服务器(php,tomcat…)</li>
+<li>缓存</li>
+<li>数据库</li>
+<li>存储</li>
+</ul>
+</li>
+<li><p>TCP四次挥手-网站负载均衡监控</p>
+</li>
+<li><p>断开连接</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-概述"><a href="#1-2-概述" class="headerlink" title="1.2.概述"></a>1.2.概述</h2><p>Zabbix 由 Alexei Vladishev 创建，目前由 Zabbix SIA 主导开发和支持。</p>
+<p>Zabbix 是一个企业级的<strong>开源分布式监控</strong>解决方案。</p>
+<p>Zabbix 是一款监控<strong>网络</strong>的众多参数以及<strong>服务器</strong>、<strong>虚拟机</strong>、<strong>应用程序</strong>、<strong>服务</strong>、<strong>数据库</strong>、<strong>网站</strong>、<strong>云</strong>等的健康和完整性的软件。Zabbix 使用灵活的通知机制，允许用户为几乎任何事件配置基于电子邮件的告警，以实现对服务器问题做出快速反应。Zabbix 基于存储的数据提供出色的报告和数据可视化功能。这使得 Zabbix 成为容量规划的理想选择。</p>
+<p>Zabbix 支持轮询和 trapping。所有 Zabbix 报告和统计数据以及配置参数都可以通过基于 Web 的前端访问。基于 Web 的前端确保可以从任何位置评估您的网络状态和服务器的健康状况。如果配置得当，不管对于拥有少量服务器的小型组织还是拥有大量服务器的大公司来讲，Zabbix 都可以在监控 IT 基础设施方面发挥重要作用。</p>
+<blockquote>
+<p>Linux相关指标命令</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/06/h4bfdp-0.png" alt="image-20230506103508282"></p>
+<p>Zabbix功能有如下：</p>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/items">数据收集</a></strong></p>
+<ul>
+<li>可用性和性能检查</li>
+<li>支持 SNMP（trapping 和 polling）、IPMI、JMX、VMware监控</li>
+<li>自定义检查</li>
+<li>以自定义间隔收集所需数据</li>
+<li>由 server&#x2F;proxy 和 agents 执行</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/triggers">灵活的阈值定义</a></strong></p>
+<ul>
+<li>可以定义非常灵活的问题阈值，称为触发器，从后端数据库引用值</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/notifications">高度可配置的告警</a></strong></p>
+<ul>
+<li>可以针对升级计划、收件人、媒体类型自定义发送通知</li>
+<li>使用宏可以使通知变得有意义和有用</li>
+<li>自动化操作包括执行远程命令</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/visualization/graphs/simple">实时图形</a></strong></p>
+<ul>
+<li>采集到的监控项值可以使用内置的绘图功能立即绘图</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/web_monitoring">网络监控功能</a></strong></p>
+<ul>
+<li>Zabbix 可以跟踪网站上的模拟鼠标点击路径并检查功能和响应时间</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/visualization">广泛的可视化选项</a></strong></p>
+<ul>
+<li>创建自定义图形的能力，可以将多个监控项组合成一个聚合图形</li>
+<li>网络拓扑图</li>
+<li>在仪表盘中显示幻灯片</li>
+<li>报表</li>
+<li>受监控资源的高级（业务）视图</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/installation/requirements#database-size">历史数据存储</a></strong></p>
+<ul>
+<li>存储在数据库中的数据</li>
+<li>可配置的历史（保留趋势）</li>
+<li>内置管家程序</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/hosts">建议的配置</a></strong></p>
+<ul>
+<li>将受监控的设备添加为主机</li>
+<li>一旦主机被数据库添加，就会开始进行数据采集</li>
+<li>将模板应用于受监控的设备</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/templates">模板的使用</a></strong></p>
+<ul>
+<li>在模板中分组检查</li>
+<li>模板可以继承其他模板</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery">网络发现</a></strong></p>
+<ul>
+<li>网络设备自动发现</li>
+<li>agent 自动注册</li>
+<li>发现文件系统、网络接口和 SNMP OID</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/web_interface">便捷的 web 界面</a></strong></p>
+<ul>
+<li>基于web的PHP前端</li>
+<li>可从任何地方访问</li>
+<li>可以通过你的方式点击（到任何页面）</li>
+<li>审计日志</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/api">Zabbix API</a></strong></p>
+<ul>
+<li>Zabbix API 为 Zabbix 提供可编程接口，用于大规模操作、第 3 方软件集成和其他用途。</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/config/users_and_usergroups">权限系统</a></strong></p>
+<ul>
+<li>安全用户认证</li>
+<li>某些用户可以被限制仅访问某些视图</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/concepts/agent">全功能且易于扩展的 agent</a></strong></p>
+<ul>
+<li>部署在被监控目标上</li>
+<li>Linux 和 Windows 操作系统都适用于</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/concepts/server">二进制守护进程</a></strong></p>
+<ul>
+<li>用 C 编写，用于提高性能和减少内存占用</li>
+<li>轻量级、便携</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/distributed_monitoring">为复杂环境做好准备</a></strong></p>
+<ul>
+<li>使用 Zabbix proxy 轻松实现远程监控</li>
+</ul>
+<h2 id="1-3-Zabbix架构"><a href="#1-3-Zabbix架构" class="headerlink" title="1.3.Zabbix架构"></a>1.3.Zabbix架构</h2><p><strong>Server</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/concepts/server">Zabbix server</a> 是 agents 向其报告可用性和完整性信息和统计信息的中心组件。server 是存储所有配置、统计和操作数据的中央存储库。</p>
+<p><strong>数据存储</strong></p>
+<p>Zabbix 收集的所有配置信息以及数据都存储在数据库中。</p>
+<p><strong>Web 界面</strong></p>
+<p>为了从任何地方和任何平台轻松访问，Zabbix 提供了基于 Web 的界面。该接口是 Zabbix server 的一部分，通常（但不一定）与 server 运行在同一台设备上。</p>
+<p><strong>Proxy</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/concepts/proxy">Zabbix proxy</a> 可以代替 Zabbix server 收集性能和可用性数据。proxy 是 Zabbix 部署的可选部分；但是对于分散单个 Zabbix server 的负载非常有用。</p>
+<p><strong>Agent</strong></p>
+<p>Zabbix agent 部署在被监控目标上，以主动监控本地资源和应用程序，并将收集到的数据报告给 Zabbix server。从 Zabbix 4.4 开始，有两种类型的 agent 可用：<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/concepts/agent">Zabbix agent</a> （轻量级，在许多平台上支持，用 C 编写）和 <a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/concepts/agent">Zabbix agent 2</a> （非常灵活，易于使用插件扩展，用 Go 编写）。</p>
+<h1 id="2-使用Zabbix"><a href="#2-使用Zabbix" class="headerlink" title="2.使用Zabbix"></a>2.使用Zabbix</h1><h2 id="2-1-配置要求"><a href="#2-1-配置要求" class="headerlink" title="2.1.配置要求"></a>2.1.配置要求</h2><table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Platform</th>
+<th align="left">CPU&#x2F;Memory</th>
+<th align="left">Database</th>
+<th align="left">Monitored hosts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>Small</em></td>
+<td align="left">CentOS</td>
+<td align="left">Virtual Appliance</td>
+<td align="left">MySQL InnoDB</td>
+<td align="left">100</td>
+</tr>
+<tr>
+<td align="left"><em>Medium</em></td>
+<td align="left">CentOS</td>
+<td align="left">2 CPU cores&#x2F;2GB</td>
+<td align="left">MySQL InnoDB</td>
+<td align="left">500</td>
+</tr>
+<tr>
+<td align="left"><em>Large</em></td>
+<td align="left">RedHat Enterprise Linux</td>
+<td align="left">4 CPU cores&#x2F;8GB</td>
+<td align="left">RAID10 MySQL InnoDB or PostgreSQL</td>
+<td align="left">&gt;1000</td>
+</tr>
+<tr>
+<td align="left"><em>Very large</em></td>
+<td align="left">RedHat Enterprise Linux</td>
+<td align="left">8 CPU cores&#x2F;16GB</td>
+<td align="left">Fast RAID10 MySQL InnoDB or PostgreSQL</td>
+<td align="left">&gt;10000</td>
+</tr>
+</tbody></table>
+<p>下表包含可用于计算 Zabbix 系统所需磁盘空间的公式：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数 所</th>
+<th align="left">磁盘空间的计算公式 （单位：字节）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>Zabbix 配置文件</em> 固定大</td>
+<td align="left">。通常为 10MB 或更少。</td>
+</tr>
+<tr>
+<td align="left"><em>History</em>(历史数据)</td>
+<td align="left">days*(items&#x2F;refresh rate)<em>24</em>3600*bytes items：监控项数量。 days：保留历史数据的天数。 refresh rate：监控项的更新间隔。 bytes：保留单个值所需要占用的字节数，依赖于数据库引擎，通常为 ~90 字节。</td>
+</tr>
+<tr>
+<td align="left"><em>Trends</em>（趋势数据）</td>
+<td align="left">days*(items&#x2F;3600)<em>24</em>3600*bytes items：监控项数量。 days：保留历史数据的天数。 bytes：保留单个趋势数据所需要占用的字节数，依赖于数据库引擎，通常为 ~90 字节。</td>
+</tr>
+<tr>
+<td align="left"><em>Events</em>（事件数据）</td>
+<td align="left">days<em>events</em>24<em>3600</em>bytes events：每秒产生的事件数量。假设最糟糕的情况下，每秒产生 1 个事件。 days：保留历史数据的天数。 bytes：保留单个趋势数据所需的字节数，取决于数据库引擎，通常为 ~170 字节。</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-Zabbix安装"><a href="#2-2-Zabbix安装" class="headerlink" title="2.2.Zabbix安装"></a>2.2.Zabbix安装</h2><ul>
+<li><p>使用yum和自定义配置安装</p>
+<ul>
+<li>lnmp+zabbix-server(yum)</li>
+<li>zabbix-web(源码包)</li>
+</ul>
+</li>
+<li><p>nginx和php环境</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum配置</span></span><br><span class="line">cur1 -o /etc /yum.repos.d/Centos-Base.repo http://mirrors.aliyun.com/repo/centos-7.repo</span><br><span class="line">yum install epel-release -y</span><br><span class="line">cur1 -o/etc/yum.pos.d/epel.repo http：//mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装nginx先要安装epel源，或者使用nginx官方源</span></span><br><span class="line"><span class="comment"># 使用nginx 1.20 php7.2</span></span><br><span class="line">yum install nginx php72w-cli php72w-fpm php72w-gd php72w-mbstring php72w-bcmath php72w-xml php72w-ldap php72w-mysqlnd -y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启服务并设置自启</span></span><br><span class="line">[root@cloud ~]<span class="comment"># systemctl enable nginx php-fpm.service </span></span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/php-fpm.service to /usr/lib/systemd/system/php-fpm.service.</span><br><span class="line">[root@cloud ~]<span class="comment"># systemctl start nginx php-fpm.service </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx配置</span></span><br><span class="line">[root@cloud ~]<span class="comment"># cat /etc/nginx/conf.d/zabbix.conf </span></span><br><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name zabbix.test;</span><br><span class="line">        root /code/zabbix;</span><br><span class="line">        location / &#123;</span><br><span class="line">                index index.php;</span><br><span class="line">        &#125;</span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">            fastcgi_index  index.php;</span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  $document_root<span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">            include        fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置php</span></span><br><span class="line"><span class="comment"># 修改组和用户</span></span><br><span class="line">[root@cloud ~]<span class="comment"># cat /etc/php-fpm.d/www.conf</span></span><br><span class="line">[www]</span><br><span class="line">user = nginx</span><br><span class="line">group = nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 准备会话保持目录</span></span><br><span class="line">[root@cloud ~]<span class="comment"># grep /var/lib/php/session /etc/php-fpm.d/www.conf </span></span><br><span class="line">php_value[session.save_path]    = /var/lib/php/session</span><br><span class="line">[root@cloud ~]<span class="comment"># mkdir -p /var/lib/php/session</span></span><br><span class="line">[root@cloud ~]<span class="comment"># chown nginx.nginx /var/lib/php/session</span></span><br><span class="line">[root@cloud ~]<span class="comment"># php-fpm -t</span></span><br><span class="line">[13-May-2023 17:56:35] NOTICE: configuration file /etc/php-fpm.conf <span class="built_in">test</span> is successful</span><br><span class="line">[root@cloud ~]<span class="comment"># systemctl reload php-fpm.service </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">[root@cloud ~]<span class="comment"># mkdir -p /code/zabbix</span></span><br><span class="line">[root@cloud ~]<span class="comment"># chown nginx.nginx /code/zabbix</span></span><br><span class="line">[root@cloud ~]<span class="comment"># vim /code/zabbix/index.php</span></span><br><span class="line">[root@cloud ~]<span class="comment"># cat /code/zabbix/index.php</span></span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br><span class="line">[root@cloud ~]<span class="comment"># curl zabbix.test</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据库配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装数据库</span></span><br><span class="line">yum install -y mariadb-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行一些安全性设置</span></span><br><span class="line">[root@cloud ~]<span class="comment"># mysql_secure_installation </span></span><br><span class="line"></span><br><span class="line">NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB</span><br><span class="line">      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!</span><br><span class="line"></span><br><span class="line">In order to <span class="built_in">log</span> into MariaDB to secure it, we<span class="string">&#x27;ll need the current</span></span><br><span class="line"><span class="string">password for the root user.  If you&#x27;</span>ve just installed MariaDB, and</span><br><span class="line">you haven<span class="string">&#x27;t set the root password yet, the password will be blank,</span></span><br><span class="line"><span class="string">so you should just press enter here.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Enter current password for root (enter for none): </span></span><br><span class="line"><span class="string">OK, successfully used password, moving on...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Setting the root password ensures that nobody can log into the MariaDB</span></span><br><span class="line"><span class="string">root user without the proper authorisation.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Set root password? [Y/n] y</span></span><br><span class="line"><span class="string">New password: </span></span><br><span class="line"><span class="string">Re-enter new password: </span></span><br><span class="line"><span class="string">Password updated successfully!</span></span><br><span class="line"><span class="string">Reloading privilege tables..</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">By default, a MariaDB installation has an anonymous user, allowing anyone</span></span><br><span class="line"><span class="string">to log into MariaDB without having to have a user account created for</span></span><br><span class="line"><span class="string">them.  This is intended only for testing, and to make the installation</span></span><br><span class="line"><span class="string">go a bit smoother.  You should remove them before moving into a</span></span><br><span class="line"><span class="string">production environment.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Remove anonymous users? [Y/n] y</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Normally, root should only be allowed to connect from &#x27;</span>localhost<span class="string">&#x27;.  This</span></span><br><span class="line"><span class="string">ensures that someone cannot guess at the root password from the network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Disallow root login remotely? [Y/n] y</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">By default, MariaDB comes with a database named &#x27;</span><span class="built_in">test</span><span class="string">&#x27; that anyone can</span></span><br><span class="line"><span class="string">access.  This is also intended only for testing, and should be removed</span></span><br><span class="line"><span class="string">before moving into a production environment.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Remove test database and access to it? [Y/n] y</span></span><br><span class="line"><span class="string"> - Dropping test database...</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"> - Removing privileges on test database...</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Reloading the privilege tables will ensure that all changes made so far</span></span><br><span class="line"><span class="string">will take effect immediately.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Reload privilege tables now? [Y/n] y</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Cleaning up...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">All done!  If you&#x27;</span>ve completed all of the above steps, your MariaDB</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="keyword">for</span> using MariaDB!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建所需库和用户</span></span><br><span class="line">mysql&gt; create database zabbix character <span class="built_in">set</span> utf8 collate utf8_bin;</span><br><span class="line">mysql&gt; create user zabbix@% identified by <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line">mysql&gt; grant all privileges on zabbix.* to zabbix@%;  <span class="comment"># 授予所有权限</span></span><br><span class="line">mysql&gt; <span class="built_in">set</span> global log_bin_trust_function_creators = 1;  <span class="comment"># 允许在启用二进制日志时创建存储函数，而无需有SUPER权限</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Zabbix服务端</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置yum</span></span><br><span class="line">rpm -Uvh https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm?spm=a2c6h.25603864.0.0.251e2e2fnsDdRT</span><br><span class="line"><span class="comment"># 修改yum</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/zabbix/zabbix//5.0/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装zabbix</span></span><br><span class="line">yum install -y zabbix-server zabbix-agent2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">zcat /usr/share/doc/zabbix-server-mysql-5.0.39/create.sql.gz</span><br><span class="line">|mysql -uzabbix -proot zabbix   <span class="comment"># 解压缩 create.sql.gz 文件并将其内容输出到标准输出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置zabbix数据库服务</span></span><br><span class="line">grep ^DB /etc/zabbix/zabbix_server.conf</span><br><span class="line">DBHost=localhost</span><br><span class="line">DBName=zabbix</span><br><span class="line">DBUser=zabbix</span><br><span class="line">DBPassword=zabbix</span><br><span class="line"></span><br><span class="line"><span class="comment"># zabbix默认开启功能</span></span><br><span class="line">LogFile=/var/log/zabbix/zabbix_server.log <span class="comment"># 日志文件位置</span></span><br><span class="line">LogFileSize=0 <span class="comment"># 日志文件大小，0不限制大小</span></span><br><span class="line">PidFile=/var/run/zabbix/zabbix_server.pid <span class="comment"># 进程 ID 文件位置</span></span><br><span class="line">SocketDir=/var/run/zabbix <span class="comment"># 套接字目录</span></span><br><span class="line">DBHost=localhost </span><br><span class="line">DBName=zabbix</span><br><span class="line">DBUser=zabbix</span><br><span class="line">DBPassword=root</span><br><span class="line">SNMPTrapperFile=/var/log/snmptrap/snmptrap.log <span class="comment"># SNMP Trapper 文件位置</span></span><br><span class="line">Timeout=4 <span class="comment"># 超时时间</span></span><br><span class="line">AlertScriptsPath=/usr/lib/zabbix/alertscripts <span class="comment"># 警告脚本路径</span></span><br><span class="line">ExternalScripts=/usr/lib/zabbix/externalscripts <span class="comment"># 外部脚本路径</span></span><br><span class="line">LogSlowQueries=3000 <span class="comment"># 记录慢查询的阈值</span></span><br><span class="line">StatsAllowedIP=127.0.0.1 <span class="comment"># 允许访问统计数据信息的IP地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启服务(默认10051端口)</span></span><br><span class="line">systemctl start zabbix-server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>zabbix前端页面</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用源码包</span></span><br><span class="line"><span class="comment"># 去官网下载源码包</span></span><br><span class="line">wget https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.39.tar.gz</span><br><span class="line">[root@cloud nfs] tar xf zabbix-5.0.34.tar.gz </span><br><span class="line">[root@cloud zabbix-5.0.34]<span class="comment"># mv ui/* /code/zabbix/</span></span><br><span class="line">[root@cloud zabbix-5.0.34]<span class="comment"># chown -R named:named /code/zabbix/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装zabbix(zabbix前端页面连接数据库与zabbix-server)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 需要在/etc/php.ini中修改的配置</span><br><span class="line">Minimum required size of PHP post is 16M (configuration option &quot;post_max_size&quot;).</span><br><span class="line">Minimum required limit on execution time of PHP scripts is 300 (configuration option &quot;max_execution_time&quot;).</span><br><span class="line">Minimum required limit on input parse time for PHP scripts is 300 (configuration option &quot;max_input_time&quot;).</span><br><span class="line">Time zone for PHP is not set (configuration parameter &quot;date.timezone&quot;).</span><br><span class="line">date.timezone = Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+<p>当你其他配置都完成后，出现这个页面就是成功了！并且配置项都可以去conf&#x2F;zabbix.conf.php文件修改</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/14/pjwsus-0.png" alt="image-20230514154501340"></p>
+<p>完成之后就可以登录zabbix了，默认用户名是<strong>Admin</strong>，密码是<strong>zabbix</strong>，登录后可以自己修改密码</p>
+<h2 id="2-3-监控主机"><a href="#2-3-监控主机" class="headerlink" title="2.3.监控主机"></a>2.3.监控主机</h2><ul>
+<li>安装zabbix-agent2</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install -y zabbix-server zabbix-agent2</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>zabbix agent</th>
+<th>zabbix agent2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发语言</td>
+<td>C</td>
+<td>Go和C</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>独立进程方式运行</td>
+<td>1个进程多线程运行，减少资源消耗占用较少tcp资源，能够承受更高并发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>监控流程<ol>
+<li>在客户端安装zabbix-agent2</li>
+<li>修改配置文件 指定Server为zabbix服务端</li>
+<li>web页面配置 —-&gt; 主机中添加主机</li>
+<li>添加后检测</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改配置文件</span></span><br><span class="line">[root@cloud code]<span class="comment"># grep &quot;Server&quot; /etc/zabbix/zabbix_agent2.conf </span></span><br><span class="line"><span class="comment">### Option: Server</span></span><br><span class="line"><span class="comment">#       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.example.com</span></span><br><span class="line"><span class="comment"># Server=</span></span><br><span class="line">Server=127.0.0.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># agent配置</span></span><br><span class="line">PidFile=/var/run/zabbix/zabbix_agent2.pid</span><br><span class="line">LogFile=/var/log/zabbix/zabbix_agent2.<span class="built_in">log</span></span><br><span class="line">LogFileSize=0</span><br><span class="line">Server=127.0.0.1</span><br><span class="line">ServerActive=127.0.0.1    <span class="comment">#  客户端主动模式的服务端ip地址</span></span><br><span class="line">Hostname=Zabbix server    <span class="comment"># 客户端主机名</span></span><br><span class="line">Include=/etc/zabbix/zabbix_agent2.d/*.conf</span><br><span class="line">ControlSocket=/tmp/agent.sock  <span class="comment"># 指定了SSH代理的控制套接字的位置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动agent</span></span><br><span class="line">[root@cloud code]<span class="comment"># systemctl start zabbix-agent2.service </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测客户端服务端是否连通</span></span><br><span class="line"><span class="comment"># 安装zabbix_get命令</span></span><br><span class="line">yum install -y zabbix-get</span><br><span class="line"><span class="comment"># 在服务端执行，如果有值则代表能获取数据</span></span><br><span class="line">zabbix_get -s 127.0.0.1 -p 10050 -k <span class="string">&quot;system.cpu.load[all,avg1]&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-自定义监控"><a href="#2-4-自定义监控" class="headerlink" title="2.4.自定义监控"></a>2.4.自定义监控</h2><p>以下监控项类型由Zabbix提供：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/zabbix_agent">Zabbix agent 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/snmp">SNMP agent 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/snmptrap">SNMP traps</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/ipmi">IPMI 检查</a></p>
+</li>
+<li><p>简单检查</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/simple_checks/vmware_keys">VMware 监控</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/log_items">日志文件监控</a></p>
+</li>
+<li><p>可计算监控项</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/calculated/aggregate">聚合计算</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/internal">Zabbix 内部检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/ssh_checks">SSH 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/telnet_checks">Telnet 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/external">外部检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/trapper">采集器监控项</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/jmx_monitoring">JMX 监控</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/odbc_checks">ODBC 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/dependent_items">相关监控项</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/http">HTTP 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/prometheus">Prometheus 检查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.4/zh/manual/config/items/itemtypes/script">脚本监控</a></p>
+</li>
+<li><p>概述</p>
+<ul>
+<li>定制化，监控我们所要的内容</li>
+<li>提升性能，提升zabbix性能，去掉不需要的监控项</li>
+<li>zabbix自定义监控：<strong>只要能够通过命令取出来的内容，就可以做自定义监控</strong></li>
+</ul>
+</li>
+<li><p>应用场景：</p>
+<ul>
+<li>定制：默认的模板中没有我们要的监控项</li>
+<li>提升zabbix性能&#x2F;优化：去掉&#x2F;定制监控项，提升zabbix服务端的性能</li>
+</ul>
+</li>
+<li><p>自定义监控流程</p>
+<ul>
+<li>Zabbix客户端，**创建key(键值)**与调试<ul>
+<li>书写监控命令&#x2F;脚本</li>
+<li>调试Debug命令与脚本</li>
+<li>写入到zabbix客户端配置文件中<code>UserParameter=key，command或脚本</code>与调试zabbix_get</li>
+</ul>
+</li>
+<li>zabbix服务端web页面<ul>
+<li>查看Web页面是否可以获取数据</li>
+<li>设置Web触发器trigger-什么时候报警</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查80端口是否占用</span></span><br><span class="line"><span class="comment"># 1.创建键值：相当于一个zabbix服务端能识别的命令，来获取zabbix客户端状态</span></span><br><span class="line"><span class="comment"># 内置键值key：zabbix_agent2 -p</span></span><br><span class="line"><span class="comment"># 自定义键值最好写在/etc/zabbix/zabbix_agent2.d/</span></span><br><span class="line">UserParameter=nginx.alive,ss -tunlp|grep -<span class="built_in">wc</span> 80</span><br><span class="line">[root@cloud ~]<span class="comment"># zabbix_get -s 127.0.0.1 -p 10050 -k nginx.alived</span></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用带参数形式</span></span><br><span class="line">nginx.alive[*],sh nginx_stat.sh <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line">nginx.alive[active,80],sh nginx_stat.sh <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line"><span class="comment"># web页面不支持参数形式，得一个个写</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#Key名本身具有有限的允许字符范围，允许的字符是：0-9a-zA-Z_-.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建监控项</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/14/10u1vm8-0.png" alt="image-20230514222723660"></p>
+<ul>
+<li>历史数据(history)保留时长：每个更新间隔获取到的数据，推荐设置为30d</li>
+<li>趋势数据(trend)保留时长：记录数据变化的趋势，推荐设置</li>
+</ul>
+<h3 id="1-监控项类型"><a href="#1-监控项类型" class="headerlink" title="1.监控项类型"></a>1.监控项类型</h3><p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/15/ikmlnv-0.png" alt="image-20230515112301799"></p>
+<h2 id="2-5-自定义触发器"><a href="#2-5-自定义触发器" class="headerlink" title="2.5.自定义触发器"></a>2.5.自定义触发器</h2><ul>
+<li><p>触发器：trigger 什么时候进行告警</p>
+</li>
+<li><p>本质使用监控项获取的数据，与我们设置的条件进行比较，从而触发警报</p>
+</li>
+<li><p>触发器表达式功能</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/15/h1kpyl-0.png" alt="image-20230515103049178"></p>
+<ul>
+<li>触发器表达式格式</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># &#123;主机名:监控项.使用函数&#125;判断条件</span></span><br><span class="line">&#123;Zabbix server:nginx.alive.last()&#125;=0</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/15/h4i29g-0.png" alt="image-20230515103547465"></p>
+<h2 id="2-6-自定义监控故障案例"><a href="#2-6-自定义监控故障案例" class="headerlink" title="2.6.自定义监控故障案例"></a>2.6.自定义监控故障案例</h2><h3 id="1-权限"><a href="#1-权限" class="headerlink" title="1.权限"></a>1.权限</h3><ul>
+<li>原因：zabbix客户端运行的时候zabbix用户，获取数据可能导致权限故障permission denied</li>
+<li>解决：授权sudo</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zabbix_get -s 127.0.0.1 -p 10050 -k vfs.file.contents[/etc/shadow]</span><br><span class="line">ZBX_NOTSUPPORTED: Cannot open file /etc/shadow: open /etc/shadow: permission denied</span><br><span class="line"></span><br><span class="line">[root@cloud ~]<span class="comment"># visudo</span></span><br><span class="line">zabbix ALL=(ALL) NOPASSWD: ALL</span><br><span class="line"></span><br><span class="line"><span class="comment"># 很难解决源key的权限问题，但是可以自定义key解决</span></span><br><span class="line">UserParameter=conf.shadow,sudo <span class="built_in">wc</span> -l /etc/shadow</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-脚本执行时间"><a href="#2-脚本执行时间" class="headerlink" title="2.脚本执行时间"></a>2.脚本执行时间</h3><ul>
+<li>zabbix默认限制命令或脚本执行时间不能超过30s</li>
+<li>修改服务端和客户端Timeout选项</li>
+</ul>
+<h3 id="3-awk取列"><a href="#3-awk取列" class="headerlink" title="3.awk取列"></a>3.awk取列</h3><ul>
+<li>自定义监控的时候推荐使用脚本，尤其是awk</li>
+<li>awk取列的时候容器出现故障 $2 推荐使用$$2</li>
+</ul>
+<h2 id="2-7-创建模板"><a href="#2-7-创建模板" class="headerlink" title="2.7.创建模板"></a>2.7.创建模板</h2><ol>
+<li>创建模板</li>
+<li>创建应用集(监控项分类)</li>
+<li>创建自定义监控项</li>
+<li>创建触发器</li>
+<li>创建图像</li>
+<li>模板可以与多个机器关联，避免web页面重复操作</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/f2obxl-0.png" alt="image-20230516091140388"></p>
+<p><strong>创建模板成功后，就可以正常添加监控项，触发器等，监控项、触发器、图形都可以直接从其他主机上复制到模板中</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/fatpcz-0.png" alt="image-20230516092516922"></p>
+<ul>
+<li>主要事项<ul>
+<li>先找一个主机配置监控项等，进行测试</li>
+<li>然后再进行创建模板</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-8-告警方案"><a href="#2-8-告警方案" class="headerlink" title="2.8.告警方案"></a>2.8.告警方案</h2><ul>
+<li>前端消息告警<ul>
+<li>开启功能并保证前端页面开启，有报警提示时，会发出声音(不推荐)</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/fdfj0q-0.png" alt="image-20230516092955148"></p>
+<h3 id="1-告警分类"><a href="#1-告警分类" class="headerlink" title="1.告警分类"></a>1.告警分类</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/fg5pzc-0.png" alt="image-20230516093412852"></p>
+<h3 id="2-邮件报警"><a href="#2-邮件报警" class="headerlink" title="2.邮件报警"></a>2.邮件报警</h3><ol>
+<li>个人&#x2F;企业邮箱</li>
+<li>开启个人邮箱smtp功能，获取授权码</li>
+<li><strong>发件人</strong>：配置zabbix报警媒介类型</li>
+<li><strong>收件人</strong>：配置用户接收报警</li>
+<li>配置动作</li>
+</ol>
+<ul>
+<li>配置报警媒介参数</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/h07kv2-0.png" alt="image-20230516102827073"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/hclegr-0.png" alt="image-20230516104907452"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/h32lsn-0.png" alt="image-20230516103307922"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/h3phdg-0.png" alt="image-2023 0516103415265"></p>
+<ul>
+<li>收件人配置<ul>
+<li><strong>对所有人员分组。权限一般以组设置</strong></li>
+<li>创建用户时设置报警媒介</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/hf1r74-0.png" alt="image-20230516105320128"></p>
+<ul>
+<li>配置动作</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/z588zj-0.png" alt="image-20230516212500172"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/z5az2u-0.png" alt="image-20230516212521858"></p>
+<h3 id="3-脚本报警"><a href="#3-脚本报警" class="headerlink" title="3.脚本报警"></a>3.脚本报警</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/16/zjs1dy-0.png" alt="image-20230516214952667"></p>
+<h2 id="2-9-zabbix客户端"><a href="#2-9-zabbix客户端" class="headerlink" title="2.9.zabbix客户端"></a>2.9.zabbix客户端</h2><table>
+<thead>
+<tr>
+<th>zabbix客户端</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zabbix-agent2(最常用)</td>
+<td>适用于几乎所有情况，linux，Windows</td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td>Simple Network Management Protocal <strong>简单网络管理协议</strong> 监控网络设备</td>
+</tr>
+<tr>
+<td>JMX</td>
+<td>Java-gateway，监控java app(tomcat)。<strong>未来建议自定义监控(zabbix_agent2 + jmap&#x2F;jstats)</strong></td>
+</tr>
+<tr>
+<td>IPMI</td>
+<td>监控硬件(物理服务器)，直接使用自定义监控(<strong>ipmitool</strong>+<strong>megacli</strong>)</td>
+</tr>
+</tbody></table>
+<h3 id="1-snmp监控"><a href="#1-snmp监控" class="headerlink" title="1.snmp监控"></a>1.snmp监控</h3><ul>
+<li><p>应用：</p>
+<ul>
+<li>监控网络设备</li>
+<li>也支持监控可以启动SNMP设备(Linux，Windows，打印机….)</li>
+</ul>
+</li>
+<li><p>使用snmp</p>
+<ol>
+<li>启动设备的SNMP功能</li>
+<li>zabbix服务端进行测试，能否获取到网络设备的信息</li>
+<li>web添加主机监控项</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1.安装snmp服务端</span></span><br><span class="line">yum install net-snmp -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.配置snmp服务端</span></span><br><span class="line">vim /etc/snmp/snmpd.conf</span><br><span class="line"><span class="comment"># 修改community为oldboy</span></span><br><span class="line">com2sec notConfigUser default oldboy</span><br><span class="line"><span class="comment"># 增加一行</span></span><br><span class="line">view systemview included</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装snmp命令</span></span><br><span class="line">yum install net-snmp-utils -y</span><br><span class="line"><span class="comment"># 使用命令</span></span><br><span class="line">snmpwalk -c oldbox -v 2c 192.168.13.1 sysUptime</span><br><span class="line">-c oldbox：指定community字符串为“oldbox”。</span><br><span class="line">-v 2c：指定SNMP协议版本为SNMPv2c。</span><br><span class="line">192.168.13.1：指定要查询的设备的IP地址。</span><br><span class="line">sysUptime：指定要查询的OID（对象标识符）。</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/ins56z-0.png" alt="image-20230519112826774"></p>
+<h3 id="2-JMX监控"><a href="#2-JMX监控" class="headerlink" title="2.JMX监控"></a>2.JMX监控</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/k0mjrn-0.png" alt="image-20230519121037713"></p>
+<ol>
+<li>安装java程序，并开启远程监控功能</li>
+<li>安装zabbix-java-gateway服务端</li>
+<li>配置web主机</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/j5sjko-0.png" alt="image-20230519115858298"></p>
+<p>这个配置只能写成一行</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/jyq97e-0.png" alt="image-20230519120719007"></p>
+<p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/k167hu-0.png" alt="image-20230519121129545"></p>
+<ul>
+<li><p>获取数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># </span><br><span class="line">java -jar cmdline-jmxclient-0.10.3.jar - 10.0.0.7:12345</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加主机</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/k4u130-0.png" alt="image-20230519121744845"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/k5buau-0.png" alt="image-20230519121827292"></p>
+<h2 id="2-10-自动化监控"><a href="#2-10-自动化监控" class="headerlink" title="2.10.自动化监控"></a>2.10.自动化监控</h2><ul>
+<li>自动发现：服务端主动</li>
+<li>自动注册：客户端主动</li>
+<li>zabbix客户端主动与被动模式</li>
+<li>zabbix分布式监控</li>
+</ul>
+<h3 id="1-自动发现和自动注册"><a href="#1-自动发现和自动注册" class="headerlink" title="1.自动发现和自动注册"></a>1.自动发现和自动注册</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>共同点</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动发现</td>
+<td>自动添加主机并关联模板，启动主机</td>
+<td>1.客户端被动<br/>2.使用简单<br/>3.效率或性能较低<br/>4.对zabbix服务端压力较大</td>
+</tr>
+<tr>
+<td>自动注册</td>
+<td>自动添加主机并管理模板，启动主机</td>
+<td>1.客户端主动<br/>2.配置繁琐一点<br/>3.对zabbix服务端压力较低<br/>4.高并发注册机器</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>自动发现</p>
+<ul>
+<li>配置自动发现规则 - 发现主机</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/zmov2g-0.png" alt="image-20230519215442063"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/znsl6m-0.png" alt="image-20230519215628552"></p>
+<ul>
+<li>配置自动发现动作 - 发现主机后关联模板等动作</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/10f5jii-0.png" alt="image-20230519220222942"></p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/19/10fp4e1-0.png" alt="image-20230519220314601"></p>
+<ul>
+<li><p>自动注册(可与ansible结合使用)</p>
+<ul>
+<li>修改zabbix客户端配置文件:ServeActive&#x3D;服务端ip 和Hostname&#x3D;…</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/h6o3n7-0.png" alt="image-20230520103911431"></p>
+<ul>
+<li>web页面，动作—-&gt;自动注册 autoreg</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/hadi1t-0.png" alt="image-20230520104534739"></p>
+<h3 id="2-zabbix-agent-取值-主动与被动"><a href="#2-zabbix-agent-取值-主动与被动" class="headerlink" title="2.zabbix-agent(取值)主动与被动"></a>2.zabbix-agent(取值)主动与被动</h3><p>zabbix-agent主动：主动向zabbix-server汇报，52个监控，请求1次，服务端收集到所有的数据</p>
+<p>zabbix-agent被动：等待zabbix-server索要，52个监控，请求52次，效率低，对zabbix服务压力大</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/ieuvmi-0.png" alt="image-20230520111333335"></p>
+<p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/ieocar-0.png" alt="image-20230520111303279"></p>
+<h2 id="2-11-分布式监控"><a href="#2-11-分布式监控" class="headerlink" title="2.11.分布式监控"></a>2.11.分布式监控</h2><ul>
+<li>应用场景：有多个机房&#x2F;网段&#x2F;地域进行监控，分布式监控（proxy代理监控）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/ifwd5j-0.png" alt="image-20230520111508279"></p>
+<ul>
+<li>安装zabbix-proxy-mysql</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-proxy-mysql-5.0.0-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>导入zabbix表结构</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> ~]<span class="comment"># zcat /usr/share/doc/zabbix-proxy-mysql-5.0.0/schema.sql.gz | mysql -uzabbix -pzabbix zabbix</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置zabbix-proxy</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> ~]<span class="comment"># grep &#x27;^[a-Z]&#x27; /etc/zabbix/zabbix_proxy.conf</span></span><br><span class="line">Server=192.168.19.136</span><br><span class="line">ServerPort=10051</span><br><span class="line">Hostname=Zabbix proxy        <span class="comment"># 代理名字，确保服务端知道代理名称，也可使用HostnameItem</span></span><br><span class="line">LogFile=/var/log/zabbix/zabbix_proxy.log</span><br><span class="line">LogFileSize=0</span><br><span class="line">PidFile=/var/run/zabbix/zabbix_proxy.pid</span><br><span class="line">SocketDir=/var/run/zabbix</span><br><span class="line">DBHost=localhost</span><br><span class="line">DBName=zabbix_proxy</span><br><span class="line">DBUser=zabbix</span><br><span class="line">DBPassword=zabbix</span><br><span class="line">SNMPTrapperFile=/var/log/snmptrap/snmptrap.log</span><br><span class="line">Timeout=4</span><br><span class="line">ExternalScripts=/usr/lib/zabbix/externalscripts</span><br><span class="line">LogSlowQueries=3000</span><br><span class="line">StatsAllowedIP=127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置web代理</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/iy0akt-0.png" alt="image-20230520114550472"></p>
+<ul>
+<li>修改客户端指向</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/j202f5-0.png" alt="image-20230520115221171"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/j1vqw0-0.png" alt="image-20230520115201131"></p>
+<h2 id="2-12-lld"><a href="#2-12-lld" class="headerlink" title="2.12.lld"></a>2.12.lld</h2><p>低级自动发现可以<strong>自动为主机上的不同实体创建监控项、触发器和图表</strong>。比如， Zabbix可以自动监控文件系统和网络接口，并且不需要为其手工创建监控项。另外，可以基于周期性自动发现的结果来删除无用的监控实体。</p>
+<ul>
+<li><p><strong>应用场景</strong></p>
+<ul>
+<li>低级自动发现<strong>特别适合用于监控那些有规律，又有差异的监控对象</strong></li>
+</ul>
+</li>
+<li><p>系统内置的自动发现</p>
+<p>如果想立刻上手熟悉其它类型的自动发现，更多信息和如何实现(how-to)方面可参阅以下章节:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/network_interfaces">网络接口</a>的自动发现;</li>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/cpu">CPU 和 CPU 核心</a>的自动发现;</li>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/snmp_oids">SNMP OID</a>的自动发现;</li>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/jmx">JMX 对象</a>的自动发现;</li>
+<li>使用<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/sql_queries">ODBC SQL 查询</a>的自动发现;</li>
+<li><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/windows_services">Windows 服务</a>的自动发现;</li>
+<li>Zabbix <a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/zh/manual/discovery/low_level_discovery/examples/host_interfaces">主机接口</a>的自动发现。</li>
+</ul>
+</li>
+<li><p>自动发现&#x2F;自动注册—-自动添加主机</p>
+</li>
+<li><p>希望zabbix自动添加监控项：自动监控一些有关联的内容：网卡、磁盘、磁盘分区…低级自动发现(Low Level Discovery)</p>
+</li>
+<li><p>系统模板自带的自动发现规则</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/m4adk2-0.png" alt="image-20230520133744442"></p>
+<ul>
+<li>系统内置自动发现<strong>键值</strong></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/05/20/m4clzb-0.png" alt="image-20230520133756225"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> zabbix]<span class="comment"># zabbix_get -s 192.168.19.137 -p 10050 -k &quot;net.if.discovery&quot;</span></span><br><span class="line">[&#123;<span class="string">&quot;&#123;#IFNAME&#125;&quot;</span>:<span class="string">&quot;lo&quot;</span>&#125;,&#123;<span class="string">&quot;&#123;#IFNAME&#125;&quot;</span>:<span class="string">&quot;virbr0-nic&quot;</span>&#125;,&#123;<span class="string">&quot;&#123;#IFNAME&#125;&quot;</span>:<span class="string">&quot;virbr0&quot;</span>&#125;,&#123;<span class="string">&quot;&#123;#IFNAME&#125;&quot;</span>:<span class="string">&quot;ens33&quot;</span>&#125;]</span><br><span class="line"><span class="comment"># zabbix内置宏 &#123;HOST.NAME&#125;</span></span><br><span class="line"><span class="comment"># zabbix 用户定义宏 &#123;$OLDBOY&#125;</span></span><br><span class="line"><span class="comment"># zabbix低级自动发现专用宏 &#123;#IFNAME&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据网卡名字创建对应的<strong>监控项原型</strong>：net.if.in[“</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">AYO</div><div class="post-copyright__author_desc">天行健，君子以自强不息</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://ayo-al.github.io/2023/06/02/zabbix/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://ayo-al.github.io/2023/06/02/zabbix/')">Zabbix监控</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://ayo-al.github.io/2023/06/02/zabbix/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Zabbix监控&amp;url=https://ayo-al.github.io/2023/06/02/zabbix/&amp;pic=/img/preview.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://AYO-Al.github.io" target="_blank">AYO</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Linux/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Linux<span class="tagsPageCount">18</span></a><a class="post-meta__box__tags" href="/tags/%E7%9B%91%E6%8E%A7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>监控<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/Zabbix/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Zabbix<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/img/preview.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/08/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%88%E6%AD%A2%E7%AC%A6/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">自定义终结符</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/14/Prometheus/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Prometheus</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2023/06/14/Prometheus/" title="Prometheus"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-06-14</div><div class="title">Prometheus</div></div></a></div><div><a href="/2023/03/02/Docker/" title="Docker详解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-03-02</div><div class="title">Docker详解</div></div></a></div><div><a href="/2023/01/20/Linux%E5%AE%89%E5%85%A8/" title="Linux安全"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-20</div><div class="title">Linux安全</div></div></a></div><div><a href="/2023/01/07/Linux%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" title="Linux日志管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-07</div><div class="title">Linux日志管理</div></div></a></div><div><a href="/2023/01/15/Linux%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/" title="Linux服务管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-15</div><div class="title">Linux服务管理</div></div></a></div><div><a href="/2023/01/25/Linux%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="Linux网络"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-25</div><div class="title">Linux网络</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Waline</span></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff">AYO的知识输出基地，</b><b style="color:#fff">以输出倒逼输入，以输出巩固知识！</b></div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">AYO</h1><div class="author-info__desc">天行健，君子以自强不息</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/AYO-Al" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://juejin.cn/user/3708003152300183" target="_blank" title="JueJin"><i class="anzhiyufont anzhiyu-icon-book"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Zabbix"><span class="toc-number">1.</span> <span class="toc-text">1.Zabbix</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E7%9B%91%E6%8E%A7%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1.1.监控概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Linux%E6%9C%89%E5%85%B3%E6%80%A7%E8%83%BD%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">1.2.Linux有关性能的指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E4%BC%81%E4%B8%9A%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E5%85%AC%E5%8F%B8%E7%9B%91%E6%8E%A7%E5%A6%82%E4%BD%95%E5%81%9A"><span class="toc-number">1.3.</span> <span class="toc-text">1.3.企业面试题：公司监控如何做</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.4.</span> <span class="toc-text">1.2.概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Zabbix%E6%9E%B6%E6%9E%84"><span class="toc-number">1.5.</span> <span class="toc-text">1.3.Zabbix架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8Zabbix"><span class="toc-number">2.</span> <span class="toc-text">2.使用Zabbix</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%85%8D%E7%BD%AE%E8%A6%81%E6%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">2.1.配置要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Zabbix%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.Zabbix安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E7%9B%91%E6%8E%A7%E4%B8%BB%E6%9C%BA"><span class="toc-number">2.3.</span> <span class="toc-text">2.3.监控主机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7"><span class="toc-number">2.4.</span> <span class="toc-text">2.4.自定义监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%9B%91%E6%8E%A7%E9%A1%B9%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.监控项类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-number">2.5.</span> <span class="toc-text">2.5.自定义触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E6%95%85%E9%9A%9C%E6%A1%88%E4%BE%8B"><span class="toc-number">2.6.</span> <span class="toc-text">2.6.自定义监控故障案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9D%83%E9%99%90"><span class="toc-number">2.6.1.</span> <span class="toc-text">1.权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="toc-number">2.6.2.</span> <span class="toc-text">2.脚本执行时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-awk%E5%8F%96%E5%88%97"><span class="toc-number">2.6.3.</span> <span class="toc-text">3.awk取列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF"><span class="toc-number">2.7.</span> <span class="toc-text">2.7.创建模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8-%E5%91%8A%E8%AD%A6%E6%96%B9%E6%A1%88"><span class="toc-number">2.8.</span> <span class="toc-text">2.8.告警方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%91%8A%E8%AD%A6%E5%88%86%E7%B1%BB"><span class="toc-number">2.8.1.</span> <span class="toc-text">1.告警分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6"><span class="toc-number">2.8.2.</span> <span class="toc-text">2.邮件报警</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%84%9A%E6%9C%AC%E6%8A%A5%E8%AD%A6"><span class="toc-number">2.8.3.</span> <span class="toc-text">3.脚本报警</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-9-zabbix%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">2.9.</span> <span class="toc-text">2.9.zabbix客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-snmp%E7%9B%91%E6%8E%A7"><span class="toc-number">2.9.1.</span> <span class="toc-text">1.snmp监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-JMX%E7%9B%91%E6%8E%A7"><span class="toc-number">2.9.2.</span> <span class="toc-text">2.JMX监控</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-10-%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%8E%A7"><span class="toc-number">2.10.</span> <span class="toc-text">2.10.自动化监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0%E5%92%8C%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C"><span class="toc-number">2.10.1.</span> <span class="toc-text">1.自动发现和自动注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-zabbix-agent-%E5%8F%96%E5%80%BC-%E4%B8%BB%E5%8A%A8%E4%B8%8E%E8%A2%AB%E5%8A%A8"><span class="toc-number">2.10.2.</span> <span class="toc-text">2.zabbix-agent(取值)主动与被动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-11-%E5%88%86%E5%B8%83%E5%BC%8F%E7%9B%91%E6%8E%A7"><span class="toc-number">2.11.</span> <span class="toc-text">2.11.分布式监控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-12-lld"><span class="toc-number">2.12.</span> <span class="toc-text">2.12.lld</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/23/DNS%E6%B7%B1%E5%85%A5/" title="DNS深入"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DNS深入"/></a><div class="content"><a class="title" href="/2023/11/23/DNS%E6%B7%B1%E5%85%A5/" title="DNS深入">DNS深入</a><time datetime="2023-11-23T06:05:51.909Z" title="发表于 2023-11-23 14:05:51">2023-11-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/16/%E7%B3%BB%E7%BB%9F%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7/" title="系统端口能让普通用户使用嘛？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统端口能让普通用户使用嘛？"/></a><div class="content"><a class="title" href="/2023/08/16/%E7%B3%BB%E7%BB%9F%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7/" title="系统端口能让普通用户使用嘛？">系统端口能让普通用户使用嘛？</a><time datetime="2023-08-15T16:00:00.000Z" title="发表于 2023-08-16 00:00:00">2023-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/" title="Kubernetes网络"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kubernetes网络"/></a><div class="content"><a class="title" href="/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/" title="Kubernetes网络">Kubernetes网络</a><time datetime="2023-07-19T16:00:00.000Z" title="发表于 2023-07-20 00:00:00">2023-07-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/14/Prometheus/" title="Prometheus"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Prometheus"/></a><div class="content"><a class="title" href="/2023/06/14/Prometheus/" title="Prometheus">Prometheus</a><time datetime="2023-06-13T16:00:00.000Z" title="发表于 2023-06-14 00:00:00">2023-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/02/zabbix/" title="Zabbix监控"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Zabbix监控"/></a><div class="content"><a class="title" href="/2023/06/02/zabbix/" title="Zabbix监控">Zabbix监控</a><time datetime="2023-06-01T16:00:00.000Z" title="发表于 2023-06-02 00:00:00">2023-06-02</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="/2609320892@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://regexlearn.com/zh-cn" title="Regex 101"><i class="anzhiyufont anzhiyu-icon-font"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://regexcrossword.com/" title="Regexcrossword"><i class="anzhiyufont anzhiyu-icon-bolt"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://learngitbranching.js.org/?demo=&amp;locale=zh_CN" title="Learn Git"><i class="anzhiyufont anzhiyu-icon-pencil"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.drawio.com/" title="draw.io"><i class="anzhiyufont anzhiyu-icon-instagram"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="algolia" target="_blank" rel="noopener" href="https://www.algolia.com/">algolia</a><a class="footer-item" title="twikoo" target="_blank" rel="noopener" href="https://twikoo.js.org/">twikoo</a><a class="footer-item" title="vercel" target="_blank" rel="noopener" href="https://vercel.com/">vercel</a></div></div><div class="footer-group"><div class="footer-title">主题</div><div class="footer-links"><a class="footer-item" title="文档" target="_blank" rel="noopener" href="https://docs.anheyu.com/">文档</a><a class="footer-item" title="源码" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu">源码</a><a class="footer-item" title="更新日志" target="_blank" rel="noopener" href="https://blog.anheyu.com/update/">更新日志</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="友链文章" href="/fcircle/">友链文章</a><a class="footer-item" title="留言板" href="/comments/">留言板</a></div></div><div class="footer-group"><div class="footer-title">协议</div><div class="footer-links"><a class="footer-item" title="隐私协议" href="/privacy/">隐私协议</a><a class="footer-item" title="Cookies" href="/cookies/">Cookies</a><a class="footer-item" title="版权协议" href="/copyright/">版权协议</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v7.0.0" title="博客框架为Hexo_v7.0.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v7.0.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2021 - 2023 By <a class="footer-bar-link" href="/" title="AYO" target="_blank">AYO</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = ["生活明朗&#44; 万物可爱&#44; 人间值得&#44; 未来可期."]
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.0.15/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/AYO-Al/AYO-Al.github.io" title="博客">博客</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="本站项目由GitHub托管">本站项目由GitHub托管</a><a class="footer-bar-link cc" href="/copyright" title="cc协议"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i><i class="anzhiyufont anzhiyu-icon-creative-commons-by-line"></i><i class="anzhiyufont anzhiyu-icon-creative-commons-nc-line"></i><i class="anzhiyufont anzhiyu-icon-creative-commons-nd-line"></i></a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">9</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://git.yuki.love/" title="AYO网站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="AYO网站"/><span class="back-menu-item-text">AYO网站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://juejin.cn/user/3708003152300183" title="AYO博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="AYO博客"/><span class="back-menu-item-text">AYO博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="GitHub"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ansible/" style="font-size: 0.88rem;">Ansible<sup>1</sup></a><a href="/tags/CDN/" style="font-size: 0.88rem;">CDN<sup>1</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/ELK/" style="font-size: 0.88rem;">ELK<sup>1</sup></a><a href="/tags/Httpd/" style="font-size: 0.88rem;">Httpd<sup>1</sup></a><a href="/tags/Keepalived/" style="font-size: 0.88rem;">Keepalived<sup>1</sup></a><a href="/tags/Kubernetes/" style="font-size: 0.88rem;">Kubernetes<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>18</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Nginx/" style="font-size: 0.88rem;">Nginx<sup>2</sup></a><a href="/tags/Prometheus/" style="font-size: 0.88rem;">Prometheus<sup>1</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>5</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/Shell/" style="font-size: 0.88rem;">Shell<sup>4</sup></a><a href="/tags/Web/" style="font-size: 0.88rem;">Web<sup>1</sup></a><a href="/tags/Zabbix/" style="font-size: 0.88rem;">Zabbix<sup>1</sup></a><a href="/tags/iptables/" style="font-size: 0.88rem;">iptables<sup>1</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>2</sup></a><a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 0.88rem;">爬虫<sup>3</sup></a><a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 0.88rem;">监控<sup>2</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">网络<sup>3</sup></a><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/" style="font-size: 0.88rem;">自动化运维<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 0.88rem;">随笔<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"><a class="tag-list" href="/tags/Linux" title="Linux">Linux</a><a class="tag-list" href="/tags/Database" title="Database">Database</a><a class="tag-list" href="/tags/Kubernetes" title="Kubernetes">Kubernetes</a></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2021 By 安知鱼 V1.6.10",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 AYO 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.yuki.love',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.yuki.love',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: '',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Twikoo' === 'Waline' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.yuki.love',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

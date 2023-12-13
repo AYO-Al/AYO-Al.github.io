@@ -1,0 +1,639 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Kubernetes网络 | AYO</title><meta name="keywords" content="Linux,Kubernetes,容器,网络"><meta name="author" content="AYO,2609320892@qq.com"><meta name="copyright" content="AYO"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Kubernetes网络"><meta name="application-name" content="Kubernetes网络"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Kubernetes网络"><meta property="og:url" content="https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/index.html"><meta property="og:site_name" content="AYO"><meta property="og:description" content="kubernetes网络主要分为分为  节点网络  Pod网络  服务网络   1.Pod网络每个Pod拥有一个IP，每个Pod中的容器共享一个网络空间，Pod中的容器分为pause容器和应用程序容器，应用程序容器通过networkmode字段设置container网络类型与pause共享一个网络空"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://ayo-al.github.io/img/preview.jpg"><meta property="article:author" content="AYO"><meta property="article:tag" content=""><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://ayo-al.github.io/img/preview.jpg"><meta name="description" content="kubernetes网络主要分为分为  节点网络  Pod网络  服务网络   1.Pod网络每个Pod拥有一个IP，每个Pod中的容器共享一个网络空间，Pod中的容器分为pause容器和应用程序容器，应用程序容器通过networkmode字段设置container网络类型与pause共享一个网络空"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.yuki.love',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多"]},
+  algolia: {"appId":"XMRZIUY8NL","apiKey":"187af2610e1cc500c95dc8b8f3a53d0e","indexName":"hexo","hits":{"per_page":6},"languages":{"input_placeholder":"输入关键词后按下回车查找","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: AYO","link":"链接: ","source":"来源: AYO","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'AYO',
+  title: 'Kubernetes网络',
+  postAI: '',
+  pageFillDescription: '1.Pod网络, 2.Service网络, 3.CNI, 1.Flannel, 2.对Docker进行设置网络主要分为分为节点网络网络服务网络网络每个拥有一个每个中的容器共享一个网络空间中的容器分为容器和应用程序容器应用程序容器通过字段设置网络类型与共享一个网络空间网络一般与网桥一个网段但是需要多主机通信所以各个节点上不能相同所以提供等插件来解决这个问题网络本质上还是容器网络相同节点的通信过程和容器之间的通信过程相同都是通过网桥进行通信但是不同节点的通信就不一样了当需要通信时会发送消息到主机的虚拟网络设备对接口上然后发送到另一个主机的虚拟网桥上再由虚拟网桥将数据包路由到目标接口具体过程如下创建当在集群中创建一个时首先会通过将的配置写入然后的一些管控组件比如会将调度到某个具体的节点上去节点上的监听到这个的创建之后它首先会读取配置目录中的配置文件配置文件里面会声明所使用的是哪一个插件然后去执行具体的插件的二进制文件再由插件进入的网络空间去配置的网络虚拟网桥和接口在这个过程中插件会为创建一个网络命名空间并将其中一个接口连接到该命名空间中另一个接口保留在主机的网络命名空间中并连接到插件创建的虚拟网桥上跨节点通信当跨节点的需要通信时本节点内无法找到目标的地址则会查找三层路由表转发这需要依靠不同节点间的网络配置来实现对于如何来配置网络在网络这块自身并没有实现网络规划的具体逻辑而是制定了一套接口规范开放给社区来实现目前主流的网络配置方案有等覆盖网络在覆盖网络中不同节点上的之间通信是通过覆盖网络实现的当一个发送数据包时数据包会通过其接口被发送到主机网络命名空间中的接口然后该接口会将数据包发送到虚拟网桥上虚拟网桥又会将数据包路由到目标的接口最终将数据包发送到目标网络与的通信创建用户通过创建一个将其写入然后检测到未绑定的开始调度并更新的绑定检测到有新的调度过来通过运行该创建当我们在中创建一个时会为其分配一个虚拟地址这个地址与的生命周期绑定在一起只要存在它就不会改变与通信之间的网络通信是通过集群内的虚拟网络实现的使用了一种名为的技术当被创建时会为其分配一个虚拟地址并为每个创建一个有唯一地址的虚拟子网中的应用程序可以通过的虚拟和端口与其他进行通信当我们在创建的时候如果我们设置了选中了需要关联的那么就会创建一个与同名的他是用来记录对应的访问地址是对的实现也就是只是用来抽象定义真正具体化干活的是它运行在每一个节点上负责该节点的网络代理它是一个中的与之间的通信实际上是通过进行的可以运行在模式下当创建了一个之后会为其创建一组规则用来实现流量的路由和负载均衡当一个请求发送到的和端口时规则会将请求重定向到后端的和端口这样就可以实现将流量从均匀的分发到后端的多个上全称为即容器网络的接口它是中标准的一个调用网络实现的接口最初是由为容器引擎创建的随着不断发展已经成为事实标准目前绝大部分的容器平台都采用标准如等通过格式的配置文件来描述网络配置当需要设置容器网络时由容器运行时负责执行插件并通过插件的标准输入来传递配置文件信息通过标准输出接收插件的执行结果仅关心容器创建时的网络分配和当容器被删除时释放网络资源这意味着负责处理容器的网络设置包括地址分配路由设置和设置等总的来说提供了一种通用插件化的方式来配置和管理容器的网络连接使得不同的网络解决方案可以以一种统一标准化的方式与各种容器运行时进行交互是一个专为定制的三层网络解决方案主要用于解决容器的跨主机通信问题是一个网络插件专门用来设置集群中容器的网络地址空间利用来存储整个集群的网络配置每个节点都运行着一个的代理服务该代理程序会为当前节点从集群的网络地址空间中获取一个子网本节点的所有容器的地址都将从该子网中分配跨主机通信会由去向查询路由信息后封装到报文中发送给另一个主机的然后由解封装后由网卡和网卡转发到目的中工作流程大致如下启动当一个节点加入到集群中时服务会在该节点上启动申请子网服务会向发出请求从预定义的更大的地址池中申请一个子网生成文件一旦子网被分配服务会在本地生成一个名位的文件其中记录了该节点的子网信息包括子网地址和网关等更新同时服务也会将这个新分配的子网信息写回到中以便其他节点可以知道这个新节点的网络配置文件记录信息整个网络的地址范围当前主机分配的子网地址范围网络的最大传输单元是否启用伪装在所有节点安装完后要在节点上配置网络信息中使用整个网络的地址范围是每个子网的长度是位和设置子网范围这里设置的是每个节点分配一个子网所以能给个节点分配使用后端类型为的后端类型主要有三种通信过程是一种技术它在内核中实现只经过一次协议栈在协议栈内就把包组装好设备是一个类型的设备负责封包解包在发送端将原始报文封装成报文然后从发送接收端收到报文后发现是一个类型报文交由进行解包优点模式是二层实现是二层帧属于因此实现起来会设计地址学习广播等二层知识缺点性能较低但是性能比性能高只需要经历一次容器到的用户态到内核态转换主机网卡都处于内核通信过程模式属于路由的方式由于没有经过任何封装纯路由实现数据只经过协议栈一次我们像划分物理网段那样对所有主机划分虚拟网络段当确保虚拟网段不会冲突时我们就可以预先的在每一台主机上对路由表进行修改把所有虚拟网段直接映射到其对应的物理地址上优点全程都在内核中完成是三种类型中性能最高的缺点需要确保所有主机都在同一个子网内通信过程使用模式的前提同样是对集群的虚拟网段进行划分我们会把虚拟网段和物理地址的映射记录到数据库中比如当用户尝试向某个虚拟地址发包时会被路由到设备上并传输给常驻进程把用户报文通过封装一层并查询数据库把报头目的地址设为目标物理地址然后再发出去优点简单易用缺点因为使用了自定的一种包头协议性数据是在用户态进行封包和解包的所以在发出包的过程中需要经过次用户态与内核态之间的数据拷贝经历容器到到到网卡的三次用户态到内核态的切换配置文件解析字段定义了服务的你需要将这个值设置为你的服务的实际地址设置集群所有节点地址字段定义了在中查询地址范围分配信息的键字段可以用于传递任何其他你想要的选项重启对进行设置安装设置完后对每个节点的进行设置运行前必须先运行在文件设置设置分配的子网配置可以使用把文件转换为启动参数这个脚本接受以下选项环境文件的路径默认为要写入的环境文件的路径默认为将每个选项输出为单独的变量例如将组合的选项输出到变量将组合选项的键设置为此值默认为设置启动参数设置完参数后记得重启',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-20 00:00:00',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="AYO" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://git.yuki.love/" title="AYO网站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="AYO网站"/><span class="back-menu-item-text">AYO网站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://juejin.cn/user/3708003152300183" title="AYO博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="AYO博客"/><span class="back-menu-item-text">AYO博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="GitHub"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">AYO</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ansible/" style="font-size: 1.05rem;">Ansible<sup>1</sup></a><a href="/tags/CDN/" style="font-size: 1.05rem;">CDN<sup>1</sup></a><a href="/tags/DNS/" style="font-size: 1.05rem;">DNS<sup>1</sup></a><a href="/tags/ELK/" style="font-size: 1.05rem;">ELK<sup>1</sup></a><a href="/tags/Httpd/" style="font-size: 1.05rem;">Httpd<sup>1</sup></a><a href="/tags/Keepalived/" style="font-size: 1.05rem;">Keepalived<sup>1</sup></a><a href="/tags/Kubernetes/" style="font-size: 1.05rem;">Kubernetes<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>18</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Nginx/" style="font-size: 1.05rem;">Nginx<sup>2</sup></a><a href="/tags/Prometheus/" style="font-size: 1.05rem;">Prometheus<sup>1</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>5</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>1</sup></a><a href="/tags/Shell/" style="font-size: 1.05rem;">Shell<sup>4</sup></a><a href="/tags/Web/" style="font-size: 1.05rem;">Web<sup>1</sup></a><a href="/tags/Zabbix/" style="font-size: 1.05rem;">Zabbix<sup>1</sup></a><a href="/tags/iptables/" style="font-size: 1.05rem;">iptables<sup>1</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 1.05rem;">容器<sup>2</sup></a><a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.05rem;">爬虫<sup>3</sup></a><a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 1.05rem;">监控<sup>2</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">网络<sup>3</sup></a><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/" style="font-size: 1.05rem;">自动化运维<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.05rem;">随笔<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Kubernetes/" itemprop="url">Kubernetes</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Linux/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Linux</span></a><a class="article-meta__tags" href="/tags/Kubernetes/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Kubernetes</span></a><a class="article-meta__tags" href="/tags/%E5%AE%B9%E5%99%A8/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>容器</span></a><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>网络</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Kubernetes网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-07-19T16:00:00.000Z" title="发表于 2023-07-20 00:00:00">2023-07-20</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-07-19T16:00:00.000Z" title="更新于 2023-07-20 00:00:00">2023-07-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/preview.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/"><header><a class="post-meta-categories" href="/categories/Kubernetes/" itemprop="url">Kubernetes</a><a href="/tags/Linux/" tabindex="-1" itemprop="url">Linux</a><a href="/tags/Kubernetes/" tabindex="-1" itemprop="url">Kubernetes</a><a href="/tags/%E5%AE%B9%E5%99%A8/" tabindex="-1" itemprop="url">容器</a><a href="/tags/%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url">网络</a><h1 id="CrawlerTitle" itemprop="name headline">Kubernetes网络</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">AYO</span><time itemprop="dateCreated datePublished" datetime="2023-07-19T16:00:00.000Z" title="发表于 2023-07-20 00:00:00">2023-07-20</time><time itemprop="dateCreated datePublished" datetime="2023-07-19T16:00:00.000Z" title="更新于 2023-07-20 00:00:00">2023-07-20</time></header><p>kubernetes网络主要分为分为</p>
+<ol>
+<li><p><strong>节点网络</strong></p>
+</li>
+<li><p><strong>Pod网络</strong></p>
+</li>
+<li><p><strong>服务网络</strong></p>
+</li>
+</ol>
+<h1 id="1-Pod网络"><a href="#1-Pod网络" class="headerlink" title="1.Pod网络"></a>1.Pod网络</h1><p>每个Pod拥有一个IP，每个Pod中的容器共享一个网络空间，Pod中的容器分为pause容器和应用程序容器，应用程序容器通过networkmode字段设置container网络类型与pause共享一个网络空间，Pod网络一般与docker0网桥一个网段，但是Pod需要多主机通信，所以各个节点上Pod IP不能相同，所以kubernetes提供Flannel、calico等CNI（Container Network Interface）插件来解决这个问题，Pod网络本质<br>上还是容器网络<br><strong>相同节点的Pod通信过程</strong>和容器之间的通信过程相同，都是通过docker0网桥进行通信</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/11/02/mdqdfa-0.png" alt="image-20231102135324993"></p>
+<p>但是<strong>不同节点的Pod通信</strong>就不一样了，当Pod需要通信时，会发送消息到主机的veth(虚拟网络设备对)接口上，然后发送到另一个主机的虚拟网桥上，再由虚拟网桥将数据包路由到目标Pod veth接口<br>具体过程如下：<br>1、<strong>Pod创建</strong>：当在集群中创建一个Pod时，首先会通过apiserver将Pod的配置写入。然后，apiserver的一些管控组件（比如Scheduler）会将Pod调度到某个具体的节点上去。Node节点上的Kubelet监听到这个Pod的创建之后，它首先<br>会读取配置目录中的配置文件，配置文件里面会声明所使用的是哪一个插件，然后去执行具体的CNI插件的二进制文件，再由CNI插件进入Pod的网络空间去配置Pod的网络。</p>
+<p>2、<strong>虚拟网桥和veth接口</strong>：在这个过程中，CNI插件会为Pod创建一个网络命名空间，并将其中一个veth接口连接到该命名空间中，另一个veth接口保留在主机的网络命名空间中，并连接到CNI插件创建的虚拟网桥上。</p>
+<p>3、<strong>跨节点通信</strong>：当跨节点的Pod需要通信时，本节点内无法找到目标Pod的MAC地址，则会查找三层路由表转发，这需要依靠不同节点间的网络配置来实现。对于如何来配置网络，k8s在网络这块自身并没有实现网络规划的具体逻辑，而是制定了一套CNI接口规范，开放给社区来实现。目前主流的网络配置方案有：Flannel、weave、calico，Macvlan等。</p>
+<p>4、<strong>Flannel覆盖网络</strong>：在flannel覆盖网络中，不同节点上的Pod之间通信是通过overlay network（覆盖网络）实现的。当一个Pod发送数据包时，数据包会通过其veth接口被发送到主机网络命名空间中的veth接口，然后该veth接口<br>会将数据包发送到虚拟网桥上。虚拟网桥又会将数据包路由到目标Pod的veth接口，最终将数据包发送到目标Pod。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/11/02/nfblm4-0.png" alt="image-20231102141645613"></p>
+<h1 id="2-Service网络"><a href="#2-Service网络" class="headerlink" title="2.Service网络"></a>2.Service网络</h1><p>service与pod的通信：<br>1、<strong>创建Pod</strong>：用户通过REST API创建一个Pod，apiserver将其写入etcd。然后，scheduler检测到未绑定Node的Pod，开始调度并更新Pod的Node绑定。kubelet检测到有新的Pod调度过来，通过container runtime运行该Pod。</p>
+<p>2、<strong>创建Service</strong>：当我们在K8s中创建一个Service时，Kubernetes会为其分配一个虚拟IP地址。这个IP地址与Service的生命周期绑定在一起，只要Service存在，它就不会改变。</p>
+<p>3、<strong>Pod与Service通信</strong>：Pod之间的网络通信是通过集群内的虚拟网络实现的，Kubernetes使用了一种名为”Overlay Network”的技术。当Service被创建时，Kubernetes会为其分配一个虚拟IP地址，并为每个Pod创建一个有唯一IP地址的虚拟子网。Pod中的应用程序可以通过Service的虚拟IP和端口与其他Pod进行通信。</p>
+<p>4、<strong>Endpoints</strong>：当我们在创建service的时候如果我们设置了selector选中了需要关联的pod，那么就会创建一个与service同名的endpoints。他是用来记录service对应pod的访问地址。</p>
+<p>5、<strong>kube-proxy</strong>：kube-proxy是对service的实现，也就是service只是用来抽象定义，真正具体化干活的是kube-proxy。它运行在每一个node节点上，负责该节点的网络代理。它是一个pod。</p>
+<p>kubernetes中的Service与Pod之间的通信实际上是通过<strong>iptables</strong>进行的。kube-proxy可以运行在iptables模式下，当创建了一个Service之后，kube-proxy会为其创建一组iptables规则，用来实现流量的路由和负载均衡</p>
+<p>当一个请求发送到Service的ClusterIp和端口时，iptables规则会将请求重定向到后端Pod的IP和端口。这样，就可以实现将流量从Service均匀的分发到后端的多个Pod上。</p>
+<h1 id="3-CNI"><a href="#3-CNI" class="headerlink" title="3.CNI"></a>3.CNI</h1><p><strong>CNI</strong>：CNI，全称为<strong>Container Network Interface</strong>，即容器网络的API接口。它是Kubernetes（K8s）中标准的一个调用网络实现的接口。CNI最初是由CoreOS为rkt容器引擎创建的，随着不断发展，已经成为事实标准。目前绝大部<br>分的容器平台都采用CNI标准（如rkt，Kubernetes ，OpenShift等）。</p>
+<p>CNI通过JSON格式的配置文件来描述网络配置，当需要设置容器网络时，由容器运行时负责执行CNI插件，并通过CNI插件的标准输入（stdin）来传递配置文件信息，通过标准输出（stdout）接收插件的执行结果。</p>
+<p>CNI仅关心容器创建时的网络分配，和当容器被删除时释放网络资源。这意味着CNI负责处理容器的网络设置，包括IP地址分配、路由设置和DNS设置等。</p>
+<p>总的来说，CNI提供了一种通用、插件化的方式来配置和管理容器的网络连接，使得不同的网络解决方案可以以一种统一、标准化的方式与各种容器运行时进行交互</p>
+<h2 id="1-Flannel"><a href="#1-Flannel" class="headerlink" title="1.Flannel"></a>1.Flannel</h2><p><strong>Flannel</strong>是一个专为kubernetes定制的三层网络解决方案，主要用于解决容器的跨主机通信问题。</p>
+<p>Flannel是一个kubernetes网络插件，专门用来设置kubernetes集群中容器的网络地址空间。Flannel利用etcd来存储整个集群的网络配置。</p>
+<p>每个节点都运行着一个Flannel的代理服务flanneld。该代理程序会为当前节点从集群的网络地址空间中，获取一个子网，本节点的所有容器的IP地址都将从该子网中分配</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/i/2023/11/02/rfu71q-0.png" alt="image-20231102165918705"></p>
+<p><strong>跨主机Pod通信，会由flanneld去向etcd查询路由信息后封装到udp报文中，发送给另一个主机的flanneld，然后由flanneld解封装后由flannel0网卡和docker0网卡转发到目的Pod中</strong></p>
+<p><strong>Flannel工作流程大致如下</strong>：</p>
+<ol>
+<li><strong>启动flanneld</strong>：当一个节点加入到集群中时，flanneld服务会在该节点上启动</li>
+<li><strong>申请子网</strong>：flanneld服务会向etcd发出请求，从预定义的更大的IP地址池中申请一个子网。</li>
+<li><strong>生成subnet.env文件</strong>：一旦子网被分配，flanneld服务会在本地生成一个名位subnet.env的文件，其中记录了该节点的子网信息，包括子网地址和网关等。</li>
+<li><strong>更新etcd</strong>：同时，flanneld服务也会将这个新分配的子网信息写回到etcd中，以便其他节点可以知道这个新节点的网络配置</li>
+</ol>
+<p><strong>subnet.env文件记录信息：</strong></p>
+<ul>
+<li><p><strong>FLANNEL_NETWORK</strong>：整个Flannel网络的地址范围。</p>
+</li>
+<li><p><strong>FLANNEL_SUBNET</strong>：当前主机分配的子网地址范围。</p>
+</li>
+<li><p><strong>FLANNEL_MTU</strong>：Flannel网络的最大传输单元（MTU）。</p>
+</li>
+<li><p><strong>FLANNEL_IPMASQ</strong>：是否启用IP伪装。</p>
+</li>
+</ul>
+<p>在所有节点安装完Flannel后，要在<strong>Master节点</strong>上配置网络信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">etcdctl --endpoints http://192.168.21.135:2379 <span class="built_in">set</span> /coreos.comnetwork/config <span class="string">&#x27;&#123;Network: &quot;10.0.0.0/16&quot;, &quot;SubnetLen&quot;:24, &quot;SubnetMin&quot;: &quot;10.0.1.0&quot;,&quot;SubnetMax&quot;:&quot;10.0.20.0&quot;,&quot;Backend&quot;:&#123;&quot;Type&quot;:&quot;vxlan&quot;&#125;&#125;&#x27;</span></span><br><span class="line"><span class="comment"># set：etcd v3 api中使用put</span></span><br><span class="line"><span class="comment"># Network:整个Flannel网络的地址范围是10.0.0.0/16</span></span><br><span class="line"><span class="comment"># SubnetLen：每个子网的长度是24位</span></span><br><span class="line"><span class="comment"># SubnetMin和SubnetMax：设置子网范围，这里设置的是10.0.1.0-10.0.20.0，每个节点分配一个子网，所以能给20个节点分配</span></span><br><span class="line"><span class="comment"># Backend：使用后端类型为vxlan</span></span><br></pre></td></tr></table></figure>
+
+<p>Flannel的后端类型主要有三种：</p>
+<ol>
+<li><strong>VXLAN</strong>：<ul>
+<li><strong>通信过程</strong>：VXLAN是一种overlay技术，它在内核中实现，只经过一次协议栈，在协议栈内就把VXLAN包组装好。flannel.1设备是一个VXLAN类型的设备，负责VXLAN封包解包。在发送端，flannel.1将原始L2报文封装成VXLAN UDP报文，然后从eth0发送。接收端收到UDP报文后，发现是一个VXLAN类型报文，交由flannel.1进行解包。</li>
+<li><strong>优点</strong>：VXLAN模式是二层实现，overlay是二层帧，属于mac in udp。因此，实现起来会设计mac地址学习，arp广播等二层知识。</li>
+<li><strong>缺点</strong>：性能较低，但是性能比udp性能高，只需要经历一次容器到docker0的用户态到内核态转换，flannel.1&#x2F;主机网卡都处于内核。</li>
+</ul>
+</li>
+<li><strong>host-gw</strong>：<ul>
+<li><strong>通信过程</strong>：host-gw模式属于路由的方式，由于没有经过任何封装，纯路由实现，数据只经过协议栈一次。我们像划分物理网段那样，对所有主机划分虚拟网络段。当确保虚拟网段不会冲突时，我们就可以预先的在每一台主机上对路由表进行修改，把所有虚拟网段直接映射到其对应的物理地址上。</li>
+<li><strong>优点</strong>：全程都在内核中完成，是三种类型中性能最高的。</li>
+<li><strong>缺点</strong>：需要确保所有主机都在同一个子网内。</li>
+</ul>
+</li>
+<li><strong>UDP</strong>：<ul>
+<li><strong>通信过程</strong>：使用UDP模式的前提同样是对集群的虚拟网段进行划分。我们会把虚拟网段和物理地址的映射记录到数据库中，比如etcd。当用户尝试向某个虚拟地址发包时会被路由到TUN设备flannel0上，并传输给常驻进程flanneld，flanneld把用户报文通过UDP封装一层，并查询数据库，把UDP报头目的地址设为目标物理地址，然后再发出去。</li>
+<li><strong>优点</strong>：简单易用。</li>
+<li><strong>缺点</strong>：因为使用了flannel自定的一种包头协议性，数据是在用户态进行封包和解包的，所以在发出IP包的过程中需要经过3次用户态与内核态之间的数据拷贝，经历容器到docker0，docker0到flannel0，flannel0到网卡的三次用户态到内核态的切换。</li>
+</ul>
+</li>
+</ol>
+<p>flannel配置文件解析：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Flanneld configuration options</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># etcd url location. Point this to the server where etcd runs</span></span><br><span class="line">FLANNEL_ETCD_ENDPOINTS=<span class="string">&quot;http://your-etcd-endpoint:2379&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># etcd config key. This is the configuration key that flannel queries</span></span><br><span class="line"><span class="comment"># For address range assignment</span></span><br><span class="line">FLANNEL_ETCD_PREFIX=<span class="string">&quot;/atomic.io/network&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Any additional options that you want to pass</span></span><br><span class="line"><span class="comment"># FLANNEL_OPTIONS=&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># FLANNEL_ETCD_ENDPOINTS字段定义了etcd服务的URL。你需要将这个值设置为你的etcd服务的实际地址，设置集群所有节点地址。</span></span><br><span class="line"><span class="comment"># FLANNEL_ETCD_PREFIX字段定义了flannel在etcd中查询地址范围分配信息的键。</span></span><br><span class="line"><span class="comment"># FLANNEL_OPTIONS字段可以用于传递任何其他你想要的选项。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart flanneld</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-对Docker进行设置"><a href="#2-对Docker进行设置" class="headerlink" title="2.对Docker进行设置"></a>2.对Docker进行设置</h2><p>安装设置完flannel后，对每个节点的docker进行设置，运行docker前必须先运行flannel</p>
+<ol>
+<li><p>在&#x2F;etc&#x2F;docker&#x2F;daemon.json文件设置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;bip&quot;</span><span class="punctuation">:</span> <span class="string">&quot;10.244.1.1/24&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"># 设置分配的子网ip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置systemd</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可以使用mk-docker-opts.sh把subnet.env文件转换为docker启动参数</span></span><br><span class="line">这个脚本接受以下选项：</span><br><span class="line">-f：flannel环境文件的路径。默认为/run/flannel/subnet.env。</span><br><span class="line">-d：要写入的Docker环境文件的路径。默认为/run/docker_opts.env。</span><br><span class="line">-i：将每个Docker选项输出为单独的变量。例如，DOCKER_OPT_MTU=1500。</span><br><span class="line">-c：将组合的Docker选项输出到DOCKER_OPTS变量。</span><br><span class="line">-k：将组合选项的键设置为此值（默认为DOCKER_OPTS=）。</span><br><span class="line"><span class="comment"># /usr/lib/systemd/system/docker.service设置启动参数</span></span><br><span class="line">[Service]</span><br><span class="line">EnvironmentFile=-docker_opts.env</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>设置完参数后，记得重启docker。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">AYO</div><div class="post-copyright__author_desc">天行健，君子以自强不息</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/')">Kubernetes网络</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Kubernetes网络&amp;url=https://ayo-al.github.io/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/&amp;pic=/img/preview.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://AYO-Al.github.io" target="_blank">AYO</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Linux/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Linux<span class="tagsPageCount">18</span></a><a class="post-meta__box__tags" href="/tags/Kubernetes/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Kubernetes<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/%E5%AE%B9%E5%99%A8/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>容器<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/%E7%BD%91%E7%BB%9C/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>网络<span class="tagsPageCount">3</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/img/preview.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/14/Prometheus/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Prometheus</div></div></a></div><div class="next-post pull-right"><a href="/2023/08/16/%E7%B3%BB%E7%BB%9F%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">系统端口能让普通用户使用嘛？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2023/03/02/Docker/" title="Docker详解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-03-02</div><div class="title">Docker详解</div></div></a></div><div><a href="/2023/01/25/Linux%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="Linux网络"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-25</div><div class="title">Linux网络</div></div></a></div><div><a href="/2023/01/20/Linux%E5%AE%89%E5%85%A8/" title="Linux安全"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-20</div><div class="title">Linux安全</div></div></a></div><div><a href="/2023/01/07/Linux%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" title="Linux日志管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-07</div><div class="title">Linux日志管理</div></div></a></div><div><a href="/2023/01/15/Linux%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/" title="Linux服务管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-01-15</div><div class="title">Linux服务管理</div></div></a></div><div><a href="/2023/03/20/Nginx/" title="Nginx"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-03-20</div><div class="title">Nginx</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Waline</span></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff">AYO的知识输出基地，</b><b style="color:#fff">以输出倒逼输入，以输出巩固知识！</b></div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">AYO</h1><div class="author-info__desc">天行健，君子以自强不息</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/AYO-Al" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://juejin.cn/user/3708003152300183" target="_blank" title="JueJin"><i class="anzhiyufont anzhiyu-icon-book"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Pod%E7%BD%91%E7%BB%9C"><span class="toc-number">1.</span> <span class="toc-text">1.Pod网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Service%E7%BD%91%E7%BB%9C"><span class="toc-number">2.</span> <span class="toc-text">2.Service网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-CNI"><span class="toc-number">3.</span> <span class="toc-text">3.CNI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Flannel"><span class="toc-number">3.1.</span> <span class="toc-text">1.Flannel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AF%B9Docker%E8%BF%9B%E8%A1%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">2.对Docker进行设置</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/23/DNS%E6%B7%B1%E5%85%A5/" title="DNS深入"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DNS深入"/></a><div class="content"><a class="title" href="/2023/11/23/DNS%E6%B7%B1%E5%85%A5/" title="DNS深入">DNS深入</a><time datetime="2023-11-23T06:05:51.909Z" title="发表于 2023-11-23 14:05:51">2023-11-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/16/%E7%B3%BB%E7%BB%9F%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7/" title="系统端口能让普通用户使用嘛？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统端口能让普通用户使用嘛？"/></a><div class="content"><a class="title" href="/2023/08/16/%E7%B3%BB%E7%BB%9F%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7/" title="系统端口能让普通用户使用嘛？">系统端口能让普通用户使用嘛？</a><time datetime="2023-08-15T16:00:00.000Z" title="发表于 2023-08-16 00:00:00">2023-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/" title="Kubernetes网络"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kubernetes网络"/></a><div class="content"><a class="title" href="/2023/07/20/kubernetes%E7%BD%91%E7%BB%9C/" title="Kubernetes网络">Kubernetes网络</a><time datetime="2023-07-19T16:00:00.000Z" title="发表于 2023-07-20 00:00:00">2023-07-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/14/Prometheus/" title="Prometheus"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Prometheus"/></a><div class="content"><a class="title" href="/2023/06/14/Prometheus/" title="Prometheus">Prometheus</a><time datetime="2023-06-13T16:00:00.000Z" title="发表于 2023-06-14 00:00:00">2023-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/02/zabbix/" title="Zabbix监控"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Zabbix监控"/></a><div class="content"><a class="title" href="/2023/06/02/zabbix/" title="Zabbix监控">Zabbix监控</a><time datetime="2023-06-01T16:00:00.000Z" title="发表于 2023-06-02 00:00:00">2023-06-02</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="/2609320892@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://regexlearn.com/zh-cn" title="Regex 101"><i class="anzhiyufont anzhiyu-icon-font"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://regexcrossword.com/" title="Regexcrossword"><i class="anzhiyufont anzhiyu-icon-bolt"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://learngitbranching.js.org/?demo=&amp;locale=zh_CN" title="Learn Git"><i class="anzhiyufont anzhiyu-icon-pencil"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.drawio.com/" title="draw.io"><i class="anzhiyufont anzhiyu-icon-instagram"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="algolia" target="_blank" rel="noopener" href="https://www.algolia.com/">algolia</a><a class="footer-item" title="twikoo" target="_blank" rel="noopener" href="https://twikoo.js.org/">twikoo</a><a class="footer-item" title="vercel" target="_blank" rel="noopener" href="https://vercel.com/">vercel</a></div></div><div class="footer-group"><div class="footer-title">主题</div><div class="footer-links"><a class="footer-item" title="文档" target="_blank" rel="noopener" href="https://docs.anheyu.com/">文档</a><a class="footer-item" title="源码" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu">源码</a><a class="footer-item" title="更新日志" target="_blank" rel="noopener" href="https://blog.anheyu.com/update/">更新日志</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="友链文章" href="/fcircle/">友链文章</a><a class="footer-item" title="留言板" href="/comments/">留言板</a></div></div><div class="footer-group"><div class="footer-title">协议</div><div class="footer-links"><a class="footer-item" title="隐私协议" href="/privacy/">隐私协议</a><a class="footer-item" title="Cookies" href="/cookies/">Cookies</a><a class="footer-item" title="版权协议" href="/copyright/">版权协议</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v7.0.0" title="博客框架为Hexo_v7.0.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v7.0.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://www.dogecloud.com/" style="margin-inline:5px" data-title="本站使用多吉云为静态资源提供CDN加速" title="本站使用多吉云为静态资源提供CDN加速"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg" alt="本站使用多吉云为静态资源提供CDN加速"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2021 - 2023 By <a class="footer-bar-link" href="/" title="AYO" target="_blank">AYO</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = ["生活明朗&#44; 万物可爱&#44; 人间值得&#44; 未来可期."]
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.0.15/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/AYO-Al/AYO-Al.github.io" title="博客">博客</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="本站项目由GitHub托管">本站项目由GitHub托管</a><a class="footer-bar-link cc" href="/copyright" title="cc协议"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i><i class="anzhiyufont anzhiyu-icon-creative-commons-by-line"></i><i class="anzhiyufont anzhiyu-icon-creative-commons-nc-line"></i><i class="anzhiyufont anzhiyu-icon-creative-commons-nd-line"></i></a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">9</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://git.yuki.love/" title="AYO网站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="AYO网站"/><span class="back-menu-item-text">AYO网站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://juejin.cn/user/3708003152300183" title="AYO博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="AYO博客"/><span class="back-menu-item-text">AYO博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/AYO-Al" title="GitHub"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ansible/" style="font-size: 0.88rem;">Ansible<sup>1</sup></a><a href="/tags/CDN/" style="font-size: 0.88rem;">CDN<sup>1</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/ELK/" style="font-size: 0.88rem;">ELK<sup>1</sup></a><a href="/tags/Httpd/" style="font-size: 0.88rem;">Httpd<sup>1</sup></a><a href="/tags/Keepalived/" style="font-size: 0.88rem;">Keepalived<sup>1</sup></a><a href="/tags/Kubernetes/" style="font-size: 0.88rem;">Kubernetes<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>18</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Nginx/" style="font-size: 0.88rem;">Nginx<sup>2</sup></a><a href="/tags/Prometheus/" style="font-size: 0.88rem;">Prometheus<sup>1</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>5</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>1</sup></a><a href="/tags/Shell/" style="font-size: 0.88rem;">Shell<sup>4</sup></a><a href="/tags/Web/" style="font-size: 0.88rem;">Web<sup>1</sup></a><a href="/tags/Zabbix/" style="font-size: 0.88rem;">Zabbix<sup>1</sup></a><a href="/tags/iptables/" style="font-size: 0.88rem;">iptables<sup>1</sup></a><a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 0.88rem;">容器<sup>2</sup></a><a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 0.88rem;">爬虫<sup>3</sup></a><a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 0.88rem;">监控<sup>2</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">网络<sup>3</sup></a><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/" style="font-size: 0.88rem;">自动化运维<sup>1</sup></a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 0.88rem;">随笔<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"><a class="tag-list" href="/tags/Linux" title="Linux">Linux</a><a class="tag-list" href="/tags/Database" title="Database">Database</a><a class="tag-list" href="/tags/Kubernetes" title="Kubernetes">Kubernetes</a></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2021 By 安知鱼 V1.6.10",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 AYO 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.yuki.love',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.yuki.love',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: '',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Twikoo' === 'Waline' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.yuki.love',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
