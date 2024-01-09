@@ -6,7 +6,7 @@
   <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayo-al.github.io/"/>
-  <updated>2023-12-13T07:38:04.342Z</updated>
+  <updated>2024-01-09T05:59:34.350Z</updated>
   <id>https://ayo-al.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux常用命令</title>
+    <link href="https://ayo-al.github.io/2024/01/09/%E5%91%BD%E4%BB%A4/"/>
+    <id>https://ayo-al.github.io/2024/01/09/%E5%91%BD%E4%BB%A4/</id>
+    <published>2024-01-09T05:57:27.497Z</published>
+    <updated>2024-01-09T05:59:34.350Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-命令行&quot;&gt;&lt;a href=&quot;#1-命令行&quot; class=&quot;headerlink&quot; title=&quot;1.命令行&quot;&gt;&lt;/a&gt;1.命令行&lt;/h1&gt;&lt;h2 id=&quot;1-命令行概述&quot;&gt;&lt;a href=&quot;#1-命令行概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="shell命令" scheme="https://ayo-al.github.io/tags/shell%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
   
   <entry>
     <title>DNS深入</title>
@@ -524,31 +549,6 @@
     <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
     <category term="网络" scheme="https://ayo-al.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux安全</title>
-    <link href="https://ayo-al.github.io/2023/01/20/Linux%E5%AE%89%E5%85%A8/"/>
-    <id>https://ayo-al.github.io/2023/01/20/Linux%E5%AE%89%E5%85%A8/</id>
-    <published>2023-01-19T16:00:00.000Z</published>
-    <updated>2023-01-21T16:00:00.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-安全防护&quot;&gt;&lt;a href=&quot;#1-安全防护&quot; class=&quot;headerlink&quot; title=&quot;1.安全防护&quot;&gt;&lt;/a&gt;1.安全防护&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/img/i/2023/06/29/qjry4h-0.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
   </entry>
   
