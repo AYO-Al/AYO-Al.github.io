@@ -264,31 +264,6 @@
   </entry>
   
   <entry>
-    <title>Linux软件管理</title>
-    <link href="https://ayo-al.github.io/2023/04/20/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/"/>
-    <id>https://ayo-al.github.io/2023/04/20/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/</id>
-    <published>2023-04-19T16:00:00.000Z</published>
-    <updated>2023-04-19T16:00:00.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-软件编译&quot;&gt;&lt;a href=&quot;#1-软件编译&quot; class=&quot;headerlink&quot; title=&quot;1.软件编译&quot;&gt;&lt;/a&gt;1.软件编译&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/img/i/2023/06/03/hdw23s-0.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Linux防火墙</title>
     <link href="https://ayo-al.github.io/2023/04/20/%E9%98%B2%E7%81%AB%E5%A2%99/"/>
     <id>https://ayo-al.github.io/2023/04/20/%E9%98%B2%E7%81%AB%E5%A2%99/</id>
@@ -312,6 +287,31 @@
     <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
     <category term="iptables" scheme="https://ayo-al.github.io/tags/iptables/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux软件管理</title>
+    <link href="https://ayo-al.github.io/2023/04/20/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/"/>
+    <id>https://ayo-al.github.io/2023/04/20/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/</id>
+    <published>2023-04-19T16:00:00.000Z</published>
+    <updated>2023-04-19T16:00:00.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-软件编译&quot;&gt;&lt;a href=&quot;#1-软件编译&quot; class=&quot;headerlink&quot; title=&quot;1.软件编译&quot;&gt;&lt;/a&gt;1.软件编译&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/img/i/2023/06/03/hdw23s-0.png&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
   </entry>
   
