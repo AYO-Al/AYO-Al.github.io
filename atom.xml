@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AYO</title>
+  <icon>https://www.gravatar.com/avatar/330b9860700e863b658ef2e2dd085201</icon>
+  <subtitle>天行健，君子以自强不息</subtitle>
+  <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://ayo-al.github.io/"/>
+  <updated>2024-02-15T13:27:05.702Z</updated>
+  <id>https://ayo-al.github.io/</id>
+  
+  <author>
+    <name>AYO</name>
+    <email>2609320892@qq.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://ayo-al.github.io/2024/02/15/Hello-World/"/>
+    <id>https://ayo-al.github.io/2024/02/15/Hello-World/</id>
+    <published>2024-02-15T13:27:05.000Z</published>
+    <updated>2024-02-15T13:27:05.702Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+</feed>
