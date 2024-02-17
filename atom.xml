@@ -6,7 +6,7 @@
   <link href="https://ayo-al.github.io/atom.xml" rel="self"/>
   
   <link href="https://ayo-al.github.io/"/>
-  <updated>2024-01-23T08:41:54.435Z</updated>
+  <updated>2024-02-17T03:06:50.971Z</updated>
   <id>https://ayo-al.github.io/</id>
   
   <author>
@@ -17,225 +17,430 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis/</id>
-    <published>2024-02-17T02:05:14.289Z</published>
-    <updated>2024-01-23T08:41:54.435Z</updated>
+    <title>ELK</title>
+    <link href="https://ayo-al.github.io/2024/06/20/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/ELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/"/>
+    <id>https://ayo-al.github.io/2024/06/20/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/ELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/</id>
+    <published>2024-06-19T16:00:00.000Z</published>
+    <updated>2024-02-17T03:06:50.971Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-什么是Redis？&quot;&gt;&lt;a href=&quot;#1-什么是Redis？&quot; class=&quot;headerlink&quot; title=&quot;1.什么是Redis？&quot;&gt;&lt;/a&gt;1.什么是Redis？&lt;/h2&gt;&lt;p&gt;Redis诞生于2009年全称是Remote Dictionary</summary>
-        
-      
+    <summary type="html">本文介绍了ELK的相关知识。</summary>
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis-trib.rb/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis-trib.rb/</id>
-    <published>2024-02-17T02:05:14.274Z</published>
-    <updated>2023-03-06T03:20:15.845Z</updated>
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;什么是redis-trib-rb&quot;&gt;&lt;a href=&quot;#什么是redis-trib-rb&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
+    <category term="Database" scheme="https://ayo-al.github.io/tags/Database/"/>
     
-    
+    <category term="ELK" scheme="https://ayo-al.github.io/tags/ELK/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E9%AB%98%E6%80%A7%E8%83%BDMySQL/%E6%A6%82%E8%BF%B0/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E9%AB%98%E6%80%A7%E8%83%BDMySQL/%E6%A6%82%E8%BF%B0/</id>
-    <published>2024-02-17T02:05:14.274Z</published>
-    <updated>2023-11-07T08:55:59.761Z</updated>
+    <title>Nginx反向代理配置</title>
+    <link href="https://ayo-al.github.io/2024/06/01/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Nginx/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+    <id>https://ayo-al.github.io/2024/06/01/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Nginx/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</id>
+    <published>2024-05-31T16:00:00.000Z</published>
+    <updated>2024-02-17T03:24:02.251Z</updated>
+    
+    
+    <summary type="html">本文介绍了Nginx中的反向代理配置。</summary>
     
     
     
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
     
     
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</id>
-    <published>2024-02-17T02:05:14.258Z</published>
-    <updated>2024-01-29T06:21:52.055Z</updated>
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
+    <category term="Nginx" scheme="https://ayo-al.github.io/tags/Nginx/"/>
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;性能监控&quot;&gt;&lt;a href=&quot;#性能监控&quot; class=&quot;headerlink&quot; title=&quot;性能监控&quot;&gt;&lt;/a&gt;性能监控&lt;/h1&gt;&lt;h2 id=&quot;1-Performance-Schema&quot;&gt;&lt;a href=&quot;#1-Performance-Schema&quot;</summary>
-        
-      
-    
-    
-    
+    <category term="反向代理" scheme="https://ayo-al.github.io/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E9%9A%8F%E7%AC%94/MySQL%E4%B8%AD%E5%85%B3%E4%BA%8E%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%E8%BF%87%E7%A8%8B%E6%A0%87%E5%BF%97%E4%BD%8D%E5%8F%98%E5%8C%96/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E9%9A%8F%E7%AC%94/MySQL%E4%B8%AD%E5%85%B3%E4%BA%8E%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%E8%BF%87%E7%A8%8B%E6%A0%87%E5%BF%97%E4%BD%8D%E5%8F%98%E5%8C%96/</id>
-    <published>2024-02-17T02:05:14.258Z</published>
-    <updated>2024-01-15T02:12:09.096Z</updated>
+    <title>Nginx模块</title>
+    <link href="https://ayo-al.github.io/2024/05/27/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Nginx/Nginx-all/"/>
+    <id>https://ayo-al.github.io/2024/05/27/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Nginx/Nginx-all/</id>
+    <published>2024-05-26T16:00:00.000Z</published>
+    <updated>2024-02-17T03:23:11.713Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;1-option-bits&quot;&gt;&lt;a href=&quot;#1-option-bits&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">本文介绍了Nginx中的相关模块知识。</summary>
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/MySQL8.0/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/MySQL8.0/</id>
-    <published>2024-02-17T02:05:14.243Z</published>
-    <updated>2024-02-08T06:52:57.456Z</updated>
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-数据库介绍&quot;&gt;&lt;a href=&quot;#1-数据库介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
-    
-    
+    <category term="Nginx" scheme="https://ayo-al.github.io/tags/Nginx/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/MySQL%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%8F%98%E9%87%8F/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/MySQL%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%8F%98%E9%87%8F/</id>
-    <published>2024-02-17T02:05:14.243Z</published>
-    <updated>2024-01-24T06:33:31.090Z</updated>
+    <title>Linux文件系统与磁盘</title>
+    <link href="https://ayo-al.github.io/2024/05/22/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A3%81%E7%9B%98/"/>
+    <id>https://ayo-al.github.io/2024/05/22/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A3%81%E7%9B%98/</id>
+    <published>2024-05-21T16:00:00.000Z</published>
+    <updated>2024-02-17T03:22:09.072Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;lower-case-table-names&quot;&gt;&lt;a href=&quot;#lower-case-table-names&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">本文介绍了Linux中的文件系统与磁盘知识。</summary>
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E4%B8%89%E9%AB%98%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E4%B8%89%E9%AB%98%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
-    <published>2024-02-17T02:05:14.243Z</published>
-    <updated>2024-01-23T08:24:49.662Z</updated>
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;第一章：介绍&quot;&gt;&lt;a href=&quot;#第一章：介绍&quot; class=&quot;headerlink&quot; title=&quot;第一章：介绍&quot;&gt;&lt;/a&gt;第一章：介绍&lt;/h1&gt;&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
+    <category term="文件系统" scheme="https://ayo-al.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     
-    
+    <category term="磁盘" scheme="https://ayo-al.github.io/tags/%E7%A3%81%E7%9B%98/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/MongoDB/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/MongoDB/</id>
-    <published>2024-02-17T02:05:14.227Z</published>
-    <updated>2024-01-23T08:21:03.925Z</updated>
+    <title>Linux防火墙</title>
+    <link href="https://ayo-al.github.io/2024/05/11/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E9%98%B2%E7%81%AB%E5%A2%99/"/>
+    <id>https://ayo-al.github.io/2024/05/11/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E9%98%B2%E7%81%AB%E5%A2%99/</id>
+    <published>2024-05-10T16:00:00.000Z</published>
+    <updated>2024-02-17T03:19:52.507Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-MongoDB相关概念&quot;&gt;&lt;a href=&quot;#1-MongoDB相关概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">本文介绍了Linux中的防火墙知识。</summary>
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/(%E8%BD%AC)mysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86/"/>
-    <id>https://ayo-al.github.io/2024/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/(%E8%BD%AC)mysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86/</id>
-    <published>2024-02-17T02:05:14.227Z</published>
-    <updated>2023-08-25T09:35:19.632Z</updated>
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-为什么需要主从复制？&quot;&gt;&lt;a href=&quot;#1-为什么需要主从复制？&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
     
-    
-    
+    <category term="防火墙" scheme="https://ayo-al.github.io/tags/%E9%98%B2%E7%81%AB%E5%A2%99/"/>
     
   </entry>
   
   <entry>
-    <title>mysql</title>
-    <link href="https://ayo-al.github.io/2024/02/15/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/mysql/"/>
-    <id>https://ayo-al.github.io/2024/02/15/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/mysql/</id>
-    <published>2024-02-14T16:00:00.000Z</published>
+    <title>Linux文件共享服务</title>
+    <link href="https://ayo-al.github.io/2024/04/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1/"/>
+    <id>https://ayo-al.github.io/2024/04/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1/</id>
+    <published>2024-04-15T16:00:00.000Z</published>
+    <updated>2024-02-17T03:21:16.612Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的文件共享服务知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="文件共享服务" scheme="https://ayo-al.github.io/tags/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux时间同步</title>
+    <link href="https://ayo-al.github.io/2024/04/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"/>
+    <id>https://ayo-al.github.io/2024/04/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/</id>
+    <published>2024-04-15T16:00:00.000Z</published>
+    <updated>2024-02-17T03:20:49.985Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的时间同步知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="时间同步" scheme="https://ayo-al.github.io/tags/%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux网络</title>
+    <link href="https://ayo-al.github.io/2024/03/22/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
+    <id>https://ayo-al.github.io/2024/03/22/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</id>
+    <published>2024-03-21T16:00:00.000Z</published>
+    <updated>2024-02-17T03:17:15.139Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的网络基础知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="网络" scheme="https://ayo-al.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Httpd</title>
+    <link href="https://ayo-al.github.io/2024/03/20/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/HTTPD/"/>
+    <id>https://ayo-al.github.io/2024/03/20/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/HTTPD/</id>
+    <published>2024-03-19T16:00:00.000Z</published>
+    <updated>2024-02-17T03:08:01.988Z</updated>
+    
+    
+    <summary type="html">本文介绍了Httpd的相关知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="Httpd" scheme="https://ayo-al.github.io/tags/Httpd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux日志管理</title>
+    <link href="https://ayo-al.github.io/2024/03/20/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"/>
+    <id>https://ayo-al.github.io/2024/03/20/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</id>
+    <published>2024-03-19T16:00:00.000Z</published>
+    <updated>2024-02-17T03:16:32.260Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的日志管理知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="日志管理" scheme="https://ayo-al.github.io/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Keepalived</title>
+    <link href="https://ayo-al.github.io/2024/03/17/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/keepalived/"/>
+    <id>https://ayo-al.github.io/2024/03/17/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/keepalived/</id>
+    <published>2024-03-16T16:00:00.000Z</published>
+    <updated>2024-02-17T03:08:53.752Z</updated>
+    
+    
+    <summary type="html">本文介绍了如何使用Keepalived高可用软件。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Keepalived" scheme="https://ayo-al.github.io/tags/Keepalived/"/>
+    
+    <category term="MLinux" scheme="https://ayo-al.github.io/tags/MLinux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux服务管理</title>
+    <link href="https://ayo-al.github.io/2024/03/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/"/>
+    <id>https://ayo-al.github.io/2024/03/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</id>
+    <published>2024-03-15T16:00:00.000Z</published>
+    <updated>2024-02-17T03:15:59.923Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的服务管理知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="服务管理" scheme="https://ayo-al.github.io/tags/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx</title>
+    <link href="https://ayo-al.github.io/2024/03/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Nginx/"/>
+    <id>https://ayo-al.github.io/2024/03/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Nginx/</id>
+    <published>2024-03-15T16:00:00.000Z</published>
+    <updated>2024-02-17T03:19:18.569Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的Nginx知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="Nginx" scheme="https://ayo-al.github.io/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux服务管理</title>
+    <link href="https://ayo-al.github.io/2024/03/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/"/>
+    <id>https://ayo-al.github.io/2024/03/16/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/</id>
+    <published>2024-03-15T16:00:00.000Z</published>
+    <updated>2024-02-17T03:20:17.030Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux中的软件管理知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+    <category term="软件管理" scheme="https://ayo-al.github.io/tags/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux</title>
+    <link href="https://ayo-al.github.io/2024/01/15/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux/"/>
+    <id>https://ayo-al.github.io/2024/01/15/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/Linux/Linux/</id>
+    <published>2024-01-14T16:00:00.000Z</published>
+    <updated>2024-02-17T03:09:31.754Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux的相关知识。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubernetes网络</title>
+    <link href="https://ayo-al.github.io/2023/11/23/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E5%AE%B9%E5%99%A8/%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/kubernetes%E7%BD%91%E7%BB%9C/"/>
+    <id>https://ayo-al.github.io/2023/11/23/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E5%AE%B9%E5%99%A8/%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/kubernetes%E7%BD%91%E7%BB%9C/</id>
+    <published>2023-11-22T16:00:00.000Z</published>
+    <updated>2024-02-17T06:41:08.227Z</updated>
+    
+    
+    <summary type="html">本文介绍了Kubernetes中的网络模型。</summary>
+    
+    
+    
+    <category term="Kubernetes" scheme="https://ayo-al.github.io/categories/Kubernetes/"/>
+    
+    
+    <category term="网络" scheme="https://ayo-al.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="云计算" scheme="https://ayo-al.github.io/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+    
+    <category term="Kubernetes" scheme="https://ayo-al.github.io/tags/Kubernetes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zabbix常用API</title>
+    <link href="https://ayo-al.github.io/2023/11/09/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E7%9B%91%E6%8E%A7/Zabbix%E5%B8%B8%E7%94%A8API/"/>
+    <id>https://ayo-al.github.io/2023/11/09/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E7%9B%91%E6%8E%A7/Zabbix%E5%B8%B8%E7%94%A8API/</id>
+    <published>2023-11-08T16:00:00.000Z</published>
+    <updated>2024-02-17T06:40:09.227Z</updated>
+    
+    
+    <summary type="html">本文介绍了如何使用Zabbix中的API。</summary>
+    
+    
+    
+    <category term="监控" scheme="https://ayo-al.github.io/categories/%E7%9B%91%E6%8E%A7/"/>
+    
+    
+    <category term="监控" scheme="https://ayo-al.github.io/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="云计算" scheme="https://ayo-al.github.io/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+    
+    <category term="Zabbix" scheme="https://ayo-al.github.io/tags/Zabbix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自定义终结符</title>
+    <link href="https://ayo-al.github.io/2023/11/06/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/shell%E7%BC%96%E7%A8%8B/%E9%9A%8F%E7%AC%94/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%88%E6%AD%A2%E7%AC%A6/"/>
+    <id>https://ayo-al.github.io/2023/11/06/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/shell%E7%BC%96%E7%A8%8B/%E9%9A%8F%E7%AC%94/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%88%E6%AD%A2%E7%AC%A6/</id>
+    <published>2023-11-05T16:00:00.000Z</published>
+    <updated>2024-02-17T06:33:43.639Z</updated>
+    
+    
+    <summary type="html">本文介绍了在Linux中如何使用自定义终结符。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://ayo-al.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Prometheus</title>
+    <link href="https://ayo-al.github.io/2023/10/15/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E7%9B%91%E6%8E%A7/Prometheus/"/>
+    <id>https://ayo-al.github.io/2023/10/15/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E7%9B%91%E6%8E%A7/Prometheus/</id>
+    <published>2023-10-14T16:00:00.000Z</published>
+    <updated>2024-02-17T06:38:33.350Z</updated>
+    
+    
+    <summary type="html">本文介绍了Prometheus的相关知识。</summary>
+    
+    
+    
+    <category term="监控" scheme="https://ayo-al.github.io/categories/%E7%9B%91%E6%8E%A7/"/>
+    
+    
+    <category term="Prometheus" scheme="https://ayo-al.github.io/tags/Prometheus/"/>
+    
+    <category term="监控" scheme="https://ayo-al.github.io/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="云计算" scheme="https://ayo-al.github.io/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL优化</title>
+    <link href="https://ayo-al.github.io/2023/09/17/MarkDown/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/"/>
+    <id>https://ayo-al.github.io/2023/09/17/MarkDown/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</id>
+    <published>2023-09-16T16:00:00.000Z</published>
     <updated>2024-02-14T16:00:00.000Z</updated>
     
     
-    <summary type="html">本文介绍了如何使用Hexo框架创建和发布文章的详细步骤。</summary>
+    <summary type="html">本文介绍了如何对MySQL进行优化。</summary>
     
     
     
     <category term="Database" scheme="https://ayo-al.github.io/categories/Database/"/>
     
     
-    <category term="Database" scheme="https://ayo-al.github.io/tags/Database/"/>
-    
     <category term="MySQL" scheme="https://ayo-al.github.io/tags/MySQL/"/>
+    
+    <category term="MySQL优化" scheme="https://ayo-al.github.io/tags/MySQL%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
