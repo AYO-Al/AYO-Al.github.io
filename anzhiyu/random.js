@@ -1,4 +1,4 @@
-var posts=["2024/02/15/Hello-World/"];function toRandomPost(){
+var posts=["2024/02/17/数据库/MongoDB/MongoDB/","2024/02/17/数据库/mysql/(转)mysql主从复制原理/","2024/02/17/数据库/mysql/MySQL8.0/","2024/02/17/数据库/mysql/MySQL常用参数与变量/","2024/02/15/数据库/mysql/mysql/","2024/02/17/数据库/redis/redis-trib.rb/","2024/02/17/数据库/mysql/三高数据库/","2024/02/17/数据库/redis/redis/","2024/02/17/数据库/mysql/数据库优化/数据库优化/","2024/02/17/数据库/mysql/随笔/MySQL中关于自动提交过程标志位变化/","2024/02/17/数据库/mysql/高性能MySQL/概述/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };var friend_link_list=[];
     var refreshNum = 1;
