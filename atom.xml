@@ -394,9 +394,9 @@
     <category term="监控" scheme="https://www.yuki.love/categories/%E7%9B%91%E6%8E%A7/"/>
     
     
-    <category term="监控" scheme="https://www.yuki.love/tags/%E7%9B%91%E6%8E%A7/"/>
-    
     <category term="云计算" scheme="https://www.yuki.love/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+    
+    <category term="监控" scheme="https://www.yuki.love/tags/%E7%9B%91%E6%8E%A7/"/>
     
     <category term="Zabbix" scheme="https://www.yuki.love/tags/Zabbix/"/>
     
@@ -436,11 +436,11 @@
     <category term="监控" scheme="https://www.yuki.love/categories/%E7%9B%91%E6%8E%A7/"/>
     
     
+    <category term="云计算" scheme="https://www.yuki.love/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+    
     <category term="Prometheus" scheme="https://www.yuki.love/tags/Prometheus/"/>
     
     <category term="监控" scheme="https://www.yuki.love/tags/%E7%9B%91%E6%8E%A7/"/>
-    
-    <category term="云计算" scheme="https://www.yuki.love/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
     
   </entry>
   
