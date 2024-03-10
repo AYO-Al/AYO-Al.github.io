@@ -31,9 +31,9 @@
     <category term="Linux" scheme="https://www.yuki.love/categories/Linux/"/>
     
     
-    <category term="Linux" scheme="https://www.yuki.love/tags/Linux/"/>
-    
     <category term="Database" scheme="https://www.yuki.love/tags/Database/"/>
+    
+    <category term="Linux" scheme="https://www.yuki.love/tags/Linux/"/>
     
     <category term="ELK" scheme="https://www.yuki.love/tags/ELK/"/>
     
@@ -336,6 +336,27 @@
   </entry>
   
   <entry>
+    <title>Linux常用命令</title>
+    <link href="https://www.yuki.love/2023/12/15/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/shell%E7%BC%96%E7%A8%8B/%E5%91%BD%E4%BB%A4/%E5%91%BD%E4%BB%A4/"/>
+    <id>https://www.yuki.love/2023/12/15/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/shell%E7%BC%96%E7%A8%8B/%E5%91%BD%E4%BB%A4/%E5%91%BD%E4%BB%A4/</id>
+    <published>2023-12-14T16:00:00.000Z</published>
+    <updated>2024-02-17T09:46:31.176Z</updated>
+    
+    
+    <summary type="html">本文介绍了Linux常用命令使用。</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://www.yuki.love/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://www.yuki.love/tags/Linux/"/>
+    
+    <category term="命令" scheme="https://www.yuki.love/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kubernetes网络</title>
     <link href="https://www.yuki.love/2023/11/23/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E5%AE%B9%E5%99%A8/%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/kubernetes%E7%BD%91%E7%BB%9C/"/>
     <id>https://www.yuki.love/2023/11/23/MarkDown/%E4%BA%91%E8%AE%A1%E7%AE%97/%E5%AE%B9%E5%99%A8/%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/kubernetes%E7%BD%91%E7%BB%9C/</id>
@@ -375,9 +396,9 @@
     
     <category term="云计算" scheme="https://www.yuki.love/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
     
-    <category term="监控" scheme="https://www.yuki.love/tags/%E7%9B%91%E6%8E%A7/"/>
-    
     <category term="Zabbix" scheme="https://www.yuki.love/tags/Zabbix/"/>
+    
+    <category term="监控" scheme="https://www.yuki.love/tags/%E7%9B%91%E6%8E%A7/"/>
     
   </entry>
   
@@ -417,30 +438,9 @@
     
     <category term="云计算" scheme="https://www.yuki.love/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
     
-    <category term="Prometheus" scheme="https://www.yuki.love/tags/Prometheus/"/>
-    
     <category term="监控" scheme="https://www.yuki.love/tags/%E7%9B%91%E6%8E%A7/"/>
     
-  </entry>
-  
-  <entry>
-    <title>MySQL优化</title>
-    <link href="https://www.yuki.love/2023/09/17/MarkDown/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/"/>
-    <id>https://www.yuki.love/2023/09/17/MarkDown/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</id>
-    <published>2023-09-16T16:00:00.000Z</published>
-    <updated>2024-02-14T16:00:00.000Z</updated>
-    
-    
-    <summary type="html">本文介绍了如何对MySQL进行优化。</summary>
-    
-    
-    
-    <category term="Database" scheme="https://www.yuki.love/categories/Database/"/>
-    
-    
-    <category term="MySQL" scheme="https://www.yuki.love/tags/MySQL/"/>
-    
-    <category term="MySQL优化" scheme="https://www.yuki.love/tags/MySQL%E4%BC%98%E5%8C%96/"/>
+    <category term="Prometheus" scheme="https://www.yuki.love/tags/Prometheus/"/>
     
   </entry>
   
